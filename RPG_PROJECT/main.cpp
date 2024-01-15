@@ -219,7 +219,7 @@ int main()
         selectedCharacter->DisplayCharacter();
 
         Weapon* sword = new Weapon("Sword", 50);
-        Armor* armor = new Armor("Demir plaka", 25, 60);
+        Armor* armor = new Armor("Iron Plate", 25, 60);
 
 
         //selectedCharacter->GainExperience(200);
