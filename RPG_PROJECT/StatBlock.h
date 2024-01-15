@@ -37,14 +37,6 @@ public:
 	void SetStrength(statusType value);
 	void SetDurability(statusType value);
 
-<<<<<<< HEAD
-=======
-	void SetStrengthPoint(statusType value)
-	{
-		strengthPoint = value;
-	}
-
->>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
 	//Functions
 	const void CalculateAllPoint() noexcept;
 	const void CalculateHealthPoint() noexcept;
