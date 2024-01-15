@@ -116,7 +116,11 @@ void PlayerCharacter::EquipWeapon(Weapon* weapon)
             value += weapon->GetWeaponPower();
         }
 
+<<<<<<< HEAD
         std::cout << "Updated Attack Power with Weapon Power: " << value << '\n';
+=======
+        std::cout << "Updated Attack Power with Weapon Power: " << value << std::endl;
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
     }
     
 }
@@ -137,7 +141,11 @@ void PlayerCharacter::EquipArmor(Armor* armor)
         }
 
         std::cout << "Updated Armor with Armor HP-DEF: " << "HP: " << hpValue
+<<<<<<< HEAD
             << "DEF: " << defValue << '\n';
+=======
+            << "DEF: " << defValue << std::endl;
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
     }
 
 
@@ -228,13 +236,21 @@ bool PlayerCharacter::checkLevel()
 
 const void PlayerCharacter::DisplayCharacter() const noexcept
 {
+<<<<<<< HEAD
     std::cout << '\n'<<"Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
+=======
+    std::cout << "Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
         << "Level: " << GetLevel() << " |" << " Exp: " << GetExp() << " | " << "Required exp: " << GetRequiredExp() << '\n'
         << "Status Point: " << GetStatsPoint() << '\n'
         << "VIT: " << stats.GetHealth() << " |" << " HP:" << MaxHealthPoint() <<  '\n'
         << "INT: " << stats.GetIntelligence() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
         << "STR: " << stats.GetStrength() << " |" << " Attack Power:" << MinAttack() << " - " << MaxAttack() << '\n'
+<<<<<<< HEAD
         << "DEX: " << stats.GetDurability() << " |" << " Defense:" << MaxDefense() << '\n' << '\n';
+=======
+        << "DEX: " << stats.GetDurability() << " |" << " Defense:" << MaxDefense() << '\n';
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
 
 }
 

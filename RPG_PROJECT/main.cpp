@@ -219,7 +219,11 @@ int main()
         selectedCharacter->DisplayCharacter();
 
         Weapon* sword = new Weapon("Sword", 50);
+<<<<<<< HEAD
         Armor* armor = new Armor("Iron Plate", 25, 60);
+=======
+        Armor* armor = new Armor("Demir plaka", 25, 60);
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
 
 
         //selectedCharacter->GainExperience(200);
@@ -231,16 +235,24 @@ int main()
         }
         if (armor)
         {
+<<<<<<< HEAD
             //selectedCharacter->EquipArmor(armor);
             //selectedCharacter->DisplayArmor();
+=======
+            selectedCharacter->EquipArmor(armor);
+            selectedCharacter->DisplayArmor();
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
         }
 
         selectedCharacter->DisplayCharacter();
 
         delete sword;
         sword = nullptr;
+<<<<<<< HEAD
         delete armor;
         armor = nullptr;
+=======
+>>>>>>> ee684d823e616ca24c393e0a294fb347f7f13882
         delete selectedCharacter;
         selectedCharacter = nullptr;
 
