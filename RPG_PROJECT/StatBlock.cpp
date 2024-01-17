@@ -3,11 +3,6 @@
 StatBlock::StatBlock(statusType VIT, statusType INT, statusType STR, statusType DEX)
 	: health(VIT),intelligence(INT),strength(STR),durability(DEX)
 {
-	healthPoint = 0u;
-	intelligencePoint = 0u;
-	strengthPoint = 0u;
-	durabilityPoint = 0u;
-
 
 	CalculateMaxAllPoint();
 }

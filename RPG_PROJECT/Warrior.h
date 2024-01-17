@@ -3,11 +3,10 @@
 #include "PlayerAbstraction.h"
 
 
-
-
-
 class Warrior final : public PlayerAbstraction
 {
+private:
+
 public:
     Warrior(Player* player);
 
@@ -16,6 +15,8 @@ public:
     Warrior(const Warrior&&) = delete;
 
     void Display() const noexcept override;
+
+
 
 };
 

@@ -224,7 +224,6 @@ int main()
             Armor* armor = new Armor("Iron Plate", 25, 60);
 
 
-
             //selectedCharacter->GainExperience(200);
 
             if (sword)
@@ -264,5 +263,6 @@ int main()
             
         }
     }
+
 	return EXIT_SUCCESS;
 }
