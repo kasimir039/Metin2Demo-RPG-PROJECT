@@ -31,9 +31,10 @@ protected:
 	PlayerCharacter(const PlayerCharacter&&) = delete;
 
 public:
-	const void DisplayCharacter() const noexcept override;
+
 	PlayerCharacter(std::string name,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
 
+	const void DisplayCharacter() const noexcept override;
 	//Getters
 	const std::string GetCharacterName() const noexcept;
 	const std::string GetKingdom() const noexcept;
@@ -48,11 +49,13 @@ public:
 	void EquipArmor(Armor* armor);
 	const void DisplayWeapons() const;
 	const void DisplayArmor() const;
+	void TakeDamage(statusType damage);
+	void IncreaseHealth(statusType value);
 
-	const equipmentType MaxAttack() const;
-	const equipmentType MinAttack() const;
-	const equipmentType MaxHealthPoint() const;
-	const equipmentType MaxDefense() const;
+	const equipmentType MaxWeaponAttack() const;
+	const equipmentType MinWeaponAttack() const;
+	const equipmentType MaxArmorHealthPoint() const;
+	const equipmentType MaxArmorDefense() const;
 
 };
 

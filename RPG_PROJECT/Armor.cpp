@@ -11,11 +11,5 @@ Armor::Armor(std::string name, equipmentType hp, equipmentType def)
 }
 
 
-const equipmentType Armor::GetArmorHp() noexcept
-{
-    return eqHp;
-}
-const equipmentType Armor::GetArmorDef() noexcept
-{
-    return eqDef;
-}
+const equipmentType Armor::GetArmorHp() noexcept { return eqHp; }
+const equipmentType Armor::GetArmorDef() noexcept { return eqDef; }

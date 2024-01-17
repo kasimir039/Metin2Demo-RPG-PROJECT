@@ -9,26 +9,64 @@ StatBlock::StatBlock(statusType VIT, statusType INT, statusType STR, statusType 
 	durabilityPoint = 0u;
 
 
-	CalculateAllPoint();
+	CalculateMaxAllPoint();
 }
 
 const statusType StatBlock::GetHealth() const noexcept { return health; }
 const statusType StatBlock::GetIntelligence() const noexcept { return intelligence; }
 const statusType StatBlock::GetStrength() const noexcept { return strength; }
 const statusType StatBlock::GetDurability() const noexcept { return durability; }
-const statusType StatBlock::GetHealthPoint() const noexcept{ return healthPoint; }
+const statusType StatBlock::GetHealthPoint() const noexcept { return healthPoint; }
 const statusType StatBlock::GetIntelligencePoint() const noexcept { return intelligencePoint; }
 const statusType StatBlock::GetStrengthPoint() const noexcept { return strengthPoint; }
 const statusType StatBlock::GetDurabilityPoint() const noexcept { return durabilityPoint; }
 
-void StatBlock::SetHealth(statusType value) {health = value; }
-void StatBlock::SetIntelligence(statusType value){ intelligence = value; }
-void StatBlock::SetStrength(statusType value){strength = value; }
-void StatBlock::SetDurability(statusType value){ durability = value; }
+void StatBlock::SetHealth(statusType value) 
+{
+	if (value < 1)
+		return;
 
+	health = value; 
 
+}
+void StatBlock::SetIntelligence(statusType value)
+{ 
+	if (value < 1)
+		return;
 
-const void StatBlock::CalculateAllPoint() noexcept {
+	intelligence = value; 
+}
+void StatBlock::SetStrength(statusType value)
+{
+	if (value < 1)
+		return;
+
+	strength = value;
+}
+void StatBlock::SetDurability(statusType value)
+{ 
+	if (value < 1)
+		return;
+	durability = value;
+}
+
+void StatBlock::SetHealthPoint(statusType value)
+{
+
+	const auto maxHp = CalculateMaxHealthPoint();
+
+	if (value > maxHp) {
+
+		healthPoint = maxHp;
+	}
+	else {
+
+		healthPoint = value;
+	}
+
+}
+
+const void StatBlock::CalculateMaxAllPoint() noexcept {
 	healthPoint = (health * POINT) / 2u;
 	intelligencePoint = (intelligence * POINT) / 2u;
 	strengthPoint = (strength * POINT) / 2u;
@@ -36,23 +74,25 @@ const void StatBlock::CalculateAllPoint() noexcept {
 
 
 }
-const void StatBlock::CalculateHealthPoint() noexcept
+const statusType StatBlock::CalculateMaxHealthPoint() noexcept
 {
-	healthPoint = (health * POINT) / 2u;
+	return healthPoint = (health * POINT) / 2u;
 	
 }
-const void StatBlock::CalculateIntelligencePoint() noexcept
+const void StatBlock::CalculateMaxIntelligencePoint() noexcept
 {
 	intelligencePoint = (intelligence * POINT) / 2u;
 }
-const statusType StatBlock::CalculateStrengthPoint() noexcept
+const void StatBlock::CalculateMaxStrengthPoint() noexcept
 {
-	return strengthPoint = (strength * POINT) / 2u;
+	strengthPoint = (strength * POINT) / 2u;
 	
 }
 
-const void StatBlock::CalculateDurabilityPoint() noexcept
+const void StatBlock::CalculateMaxDurabilityPoint() noexcept
 {
 	durabilityPoint = (durability * POINT) / 2u;
 
 }
+
+

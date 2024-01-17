@@ -45,19 +45,18 @@ const void PlayerCharacter::DisplayArmor() const
     }
 }
 
-
-const equipmentType PlayerCharacter::MaxAttack() const
+const equipmentType PlayerCharacter::MaxWeaponAttack() const
 {
 
     if (!weapons.empty())
     {
-        auto val = Weapon::GetWeaponPower() + stats.GetStrengthPoint();
-        return val;
+        auto value = Weapon::GetWeaponPower() + stats.GetStrengthPoint();
+        return value;
     }
     return 0;
 }
 
-const equipmentType PlayerCharacter::MinAttack() const
+const equipmentType PlayerCharacter::MinWeaponAttack() const
 {
 
     if (!weapons.empty())
@@ -69,28 +68,33 @@ const equipmentType PlayerCharacter::MinAttack() const
         }
 
     }
-    return stats.GetStrengthPoint();
+
+    auto strengthVal = stats.GetStrengthPoint();
+    return strengthVal;
 }
 
-const equipmentType PlayerCharacter::MaxHealthPoint() const
+const equipmentType PlayerCharacter::MaxArmorHealthPoint() const
 {
     if (!armors.empty())
     {
-        auto val = Armor::GetArmorHp() + stats.GetHealthPoint();
-        return val;
+        auto value = Armor::GetArmorHp() + stats.GetHealthPoint();
+        return value;
     }
-    return stats.GetHealthPoint();
+
+    auto healthVal = stats.GetHealthPoint();
+    return healthVal;
 }
 
 
-const equipmentType PlayerCharacter::MaxDefense() const
+const equipmentType PlayerCharacter::MaxArmorDefense() const
 {
     if (!armors.empty())
     {
-        auto val = Armor::GetArmorDef() + stats.GetDurabilityPoint();
-        return val;
+        auto value = Armor::GetArmorDef() + stats.GetDurabilityPoint();
+        return value;
     }
-    return stats.GetDurabilityPoint();
+    auto durabilityVal = stats.GetDurabilityPoint();
+    return durabilityVal;
 }
 
 
@@ -172,7 +176,7 @@ void PlayerCharacter::IncreaseStats()
                 auto healthValue = stats.GetHealth();
                 healthValue += 1;
                 stats.SetHealth(healthValue);
-                stats.CalculateHealthPoint();
+                stats.CalculateMaxHealthPoint();
                 break;
             }
             case 2:
@@ -180,7 +184,7 @@ void PlayerCharacter::IncreaseStats()
                 auto intelligenceValue = stats.GetIntelligence();
                 intelligenceValue += 1;
                 stats.SetIntelligence(intelligenceValue);
-                stats.CalculateIntelligencePoint();
+                stats.CalculateMaxIntelligencePoint();
                 break;
             }
             case 3:
@@ -188,7 +192,7 @@ void PlayerCharacter::IncreaseStats()
                 auto strengthValue = stats.GetStrength();
                 strengthValue += 1;
                 stats.SetStrength(strengthValue);
-                stats.CalculateStrengthPoint();
+                stats.CalculateMaxStrengthPoint();
                 break;
             }
             case 4:
@@ -196,7 +200,7 @@ void PlayerCharacter::IncreaseStats()
                 auto durabilityValue = stats.GetDurability();
                 durabilityValue += 1;
                 stats.SetDurability(durabilityValue);
-                stats.CalculateDurabilityPoint();
+                stats.CalculateMaxDurabilityPoint();
                 break;
             }
             default:
@@ -232,10 +236,41 @@ const void PlayerCharacter::DisplayCharacter() const noexcept
     std::cout << '\n'<<"Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
         << "Level: " << GetLevel() << " |" << " Exp: " << GetExp() << " | " << "Required exp: " << GetRequiredExp() << '\n'
         << "Status Point: " << GetStatsPoint() << '\n'
-        << "VIT: " << stats.GetHealth() << " |" << " HP:" << MaxHealthPoint() <<  '\n'
+        << "VIT: " << stats.GetHealth() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
         << "INT: " << stats.GetIntelligence() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
-        << "STR: " << stats.GetStrength() << " |" << " Attack Power:" << MinAttack() << " - " << MaxAttack() << '\n'
-        << "DEX: " << stats.GetDurability() << " |" << " Defense:" << MaxDefense() << '\n' << '\n';
+        << "STR: " << stats.GetStrength() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
+        << "DEX: " << stats.GetDurability() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
 
 }
 
+void PlayerCharacter::TakeDamage(statusType damage)
+{
+    auto hp = stats.GetHealthPoint();
+    if (damage > hp)
+    {
+        stats.SetHealthPoint(0);
+    }
+    else 
+    {
+
+        stats.SetHealthPoint(hp - damage);
+        std::cout << "Damage Received: " << damage <<'\n';
+    }
+
+}
+
+void PlayerCharacter::IncreaseHealth(statusType value)
+{
+    
+    auto hp = stats.GetHealthPoint();
+    auto maxHp = stats.CalculateMaxHealthPoint();
+
+    if (hp + value > maxHp)
+    {
+        stats.SetHealthPoint(maxHp);
+    }
+
+    stats.SetHealthPoint(hp + value);
+    std::cout << "Increased Amount of Health: " << value;
+
+}

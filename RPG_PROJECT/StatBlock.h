@@ -36,14 +36,17 @@ public:
 	void SetIntelligence(statusType value);
 	void SetStrength(statusType value);
 	void SetDurability(statusType value);
+	void SetHealthPoint(statusType value);
+	//void SetIntelligencePoint(statusType value);
+	//void SetStrengthPoint(statusType value);
+	//void SetDurabilityPoint(statusType value);
 
 	//Functions
-	const void CalculateAllPoint() noexcept;
-	const void CalculateHealthPoint() noexcept;
-	const void CalculateIntelligencePoint() noexcept;
-	const statusType CalculateStrengthPoint() noexcept;
-	const void CalculateDurabilityPoint() noexcept;
-
+	const void CalculateMaxAllPoint() noexcept;
+	const statusType CalculateMaxHealthPoint() noexcept;
+	const void CalculateMaxIntelligencePoint() noexcept;
+	const void CalculateMaxStrengthPoint() noexcept;
+	const void CalculateMaxDurabilityPoint() noexcept;
 
 };
 

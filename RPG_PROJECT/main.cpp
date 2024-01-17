@@ -214,44 +214,55 @@ int main()
 {
     CreateMainCharacter();
 
-    if (selectedCharacter)
+    while (true)
     {
-        selectedCharacter->DisplayCharacter();
-
-        Weapon* sword = new Weapon("Sword", 50);
-        Armor* armor = new Armor("Iron Plate", 25, 60);
-
-
-
-        //selectedCharacter->GainExperience(200);
-
-        if (sword)
+        if (selectedCharacter)
         {
-            //selectedCharacter->EquipWeapon(sword);
-            //selectedCharacter->DisplayWeapons();
+            selectedCharacter->DisplayCharacter();
+
+            Weapon* sword = new Weapon("Sword", 50);
+            Armor* armor = new Armor("Iron Plate", 25, 60);
+
+
+
+            //selectedCharacter->GainExperience(200);
+
+            if (sword)
+            {
+                //selectedCharacter->EquipWeapon(sword);
+                //selectedCharacter->DisplayWeapons();
+            }
+            if (armor)
+            {
+
+                //selectedCharacter->EquipArmor(armor);
+                //selectedCharacter->DisplayArmor();
+
+            }
+
+            /*
+            selectedCharacter->TakeDamage(5);
+
+            selectedCharacter->IncreaseHealth(3);
+
+            selectedCharacter->DisplayCharacter();
+
+            selectedCharacter->IncreaseHealth(3);
+            */
+
+            selectedCharacter->DisplayCharacter();
+
+
+            delete sword;
+            sword = nullptr;
+
+            delete armor;
+            armor = nullptr;
+
+            delete selectedCharacter;
+            selectedCharacter = nullptr;
+            
         }
-        if (armor)
-        {
-
-            //selectedCharacter->EquipArmor(armor);
-            //selectedCharacter->DisplayArmor();
-
-            selectedCharacter->EquipArmor(armor);
-            selectedCharacter->DisplayArmor();
-        }
-
-        selectedCharacter->DisplayCharacter();
-
-        delete sword;
-        sword = nullptr;
-
-        delete armor;
-        armor = nullptr;
-
-        delete selectedCharacter;
-        selectedCharacter = nullptr;
-
     }
-
 	return EXIT_SUCCESS;
 }
