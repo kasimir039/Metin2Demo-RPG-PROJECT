@@ -6,6 +6,7 @@
 #include <vector>
 
 enum KINGDOM { CHUNJO = 1, JINNO, SHINSOO };
+enum KINGDOM { VIT = 1, INT, STR,DEX };
 
 class PlayerCharacter : public Player
 {
@@ -23,6 +24,7 @@ protected:
 	expType experience;
 	expType requiredExperience;
 	levelType level;
+	const levelType maxLevel = 99;
 	StatBlock stats;
 	statusType statsPoint;
 

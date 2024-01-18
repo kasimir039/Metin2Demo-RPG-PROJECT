@@ -1,7 +1,9 @@
 #include "PlayerCharacter.h"
 
 PlayerCharacter::PlayerCharacter(std::string name, KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : characterName(name),kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(100u), statsPoint(0u) {}
+    : characterName(name),kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(100u), statsPoint(0u) 
+{
+}
 
 const std::string PlayerCharacter::GetCharacterName() const noexcept { return characterName; }
 
@@ -90,18 +92,23 @@ const equipmentType PlayerCharacter::MaxArmorDefense() const
 {
     if (!armors.empty())
     {
-        auto value = Armor::GetArmorDef() + stats.GetDurabilityPoint();
+        auto value = Armor::GetArmorDef() + stats.GetDexPoint();
         return value;
     }
-    auto durabilityVal = stats.GetDurabilityPoint();
+    auto durabilityVal = stats.GetDexPoint();
     return durabilityVal;
 }
 
 
 void PlayerCharacter::GainExperience(expType expAmount)
 {
-    experience += expAmount;
-    while(checkLevel());
+    if (level < maxLevel)
+    {
+        experience += expAmount;
+        while (checkLevel());
+    }
+
+
 
 }
 
@@ -134,7 +141,7 @@ void PlayerCharacter::EquipArmor(Armor* armor)
     if (!armors.empty())
     {
         auto hpValue = stats.GetHealthPoint();
-        auto defValue = stats.GetDurabilityPoint();
+        auto defValue = stats.GetDexPoint();
         for (const auto& armor : armors)
         {
             hpValue += armor->GetArmorHp();
@@ -151,8 +158,10 @@ void PlayerCharacter::EquipArmor(Armor* armor)
 
 void PlayerCharacter::IncreaseStats()
 {
+    auto currentValue = 0;
+    auto maxValue = 0;
 
-    if (level > 1)
+    if (level < maxLevel)
     {
         statsPoint = 3;
 
@@ -171,37 +180,65 @@ void PlayerCharacter::IncreaseStats()
 
             switch (choice)
             {
-            case 1:
+            case VIT:
             {
-                auto healthValue = stats.GetHealth();
-                healthValue += 1;
-                stats.SetHealth(healthValue);
-                stats.CalculateMaxHealthPoint();
-                break;
+                currentValue = stats.GetVit();
+                maxValue = stats.GetMaxVit();
+
+                if (currentValue < maxValue)
+                {
+                    currentValue += 1;
+                    stats.SetHealth(currentValue);
+                    stats.CalculateMaxHealthPoint();
+                    break;
+                }
+                std::cout << "\nPlease Make Another Choice. " << maxValue<<'\n';
+                continue;
             }
-            case 2:
+            case INT:
             {
-                auto intelligenceValue = stats.GetIntelligence();
-                intelligenceValue += 1;
-                stats.SetIntelligence(intelligenceValue);
-                stats.CalculateMaxIntelligencePoint();
-                break;
+               currentValue = stats.GetInt();
+               maxValue = stats.GetMaxInt();
+
+                if (currentValue < maxValue)
+                {
+                    currentValue += 1;
+                    stats.SetIntelligence(currentValue);
+                    stats.CalculateMaxIntelligencePoint();
+                    break;
+                }
+                std::cout << "\nPlease Make Another Choice. " << maxValue << '\n';
+                continue;
             }
-            case 3:
+            case STR:
             {
-                auto strengthValue = stats.GetStrength();
-                strengthValue += 1;
-                stats.SetStrength(strengthValue);
-                stats.CalculateMaxStrengthPoint();
-                break;
+               currentValue = stats.GetStr();
+               maxValue = stats.GetMaxStr();
+
+                if (currentValue < maxValue)
+                {
+                    currentValue += 1;
+                    stats.SetStrength(currentValue);
+                    stats.CalculateMaxStrengthPoint();
+                    break;
+                }
+                std::cout << "\nPlease Make Another Choice. " << maxValue << '\n';
+                continue;
             }
-            case 4:
+            case DEX:
             {
-                auto durabilityValue = stats.GetDurability();
-                durabilityValue += 1;
-                stats.SetDurability(durabilityValue);
-                stats.CalculateMaxDurabilityPoint();
-                break;
+               currentValue = stats.GetDex();
+               maxValue = stats.GetMaxDex();
+
+                if (currentValue < maxValue)
+                {
+                    currentValue += 1;
+                    stats.SetDex(currentValue);
+                    stats.CalculateMaxDexPoint();
+                    break;
+                }
+                std::cout << "\nPlease Make Another Choice. " << maxValue << '\n';
+                continue;
             }
             default:
                 std::cout << "Invalid selection, try again.\n";
@@ -216,18 +253,25 @@ void PlayerCharacter::IncreaseStats()
 
 bool PlayerCharacter::checkLevel()
 {
-    static const uint16_t EXPINCREASE = 2u;
-    if (experience >= requiredExperience)
+    static const uint64_t EXPINCREASE = 2u;
+    if (level < maxLevel)
     {
-        ++level;
-        std::cout << "LEVEL UP!: " << level << '\n';
-        requiredExperience *= EXPINCREASE;
-        experience = 0u;
-        IncreaseStats();
-        return true;
+
+
+        if (experience >= requiredExperience)
+        {
+            uint64_t excessExp = experience - requiredExperience;
+            ++level;
+            std::cout << "LEVEL UP!: " << level << '\n';
+            requiredExperience *= EXPINCREASE;
+            experience = excessExp;
+            IncreaseStats();
+            return true;
+        }
     }
     return false;
 }
+
 
 
 const void PlayerCharacter::DisplayCharacter() const noexcept
@@ -236,10 +280,10 @@ const void PlayerCharacter::DisplayCharacter() const noexcept
     std::cout << '\n'<<"Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
         << "Level: " << GetLevel() << " |" << " Exp: " << GetExp() << " | " << "Required exp: " << GetRequiredExp() << '\n'
         << "Status Point: " << GetStatsPoint() << '\n'
-        << "VIT: " << stats.GetHealth() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
-        << "INT: " << stats.GetIntelligence() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
-        << "STR: " << stats.GetStrength() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
-        << "DEX: " << stats.GetDurability() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
+        << "VIT: " << stats.GetVit() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
+        << "INT: " << stats.GetInt() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
+        << "STR: " << stats.GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
+        << "DEX: " << stats.GetDex() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
 
 }
 
