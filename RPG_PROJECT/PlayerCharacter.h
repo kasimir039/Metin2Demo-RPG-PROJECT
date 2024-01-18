@@ -6,7 +6,7 @@
 #include <vector>
 
 enum KINGDOM { CHUNJO = 1, JINNO, SHINSOO };
-enum KINGDOM { VIT = 1, INT, STR,DEX };
+enum STATS { VIT = 1, INT, STR,DEX };
 
 class PlayerCharacter : public Player
 {
@@ -49,11 +49,11 @@ public:
 	void GainExperience(expType exp);
 	void EquipWeapon(Weapon* weapon);
 	void EquipArmor(Armor* armor);
-	const void DisplayWeapons() const;
-	const void DisplayArmor() const;
 	void TakeDamage(statusType damage);
 	void IncreaseHealth(statusType value);
 
+	const void DisplayWeapons() const;
+	const void DisplayArmor() const;
 	const equipmentType MaxWeaponAttack() const;
 	const equipmentType MinWeaponAttack() const;
 	const equipmentType MaxArmorHealthPoint() const;

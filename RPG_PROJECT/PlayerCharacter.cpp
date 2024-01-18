@@ -99,7 +99,6 @@ const equipmentType PlayerCharacter::MaxArmorDefense() const
     return durabilityVal;
 }
 
-
 void PlayerCharacter::GainExperience(expType expAmount)
 {
     if (level < maxLevel)
