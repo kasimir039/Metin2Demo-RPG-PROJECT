@@ -218,18 +218,17 @@ int main()
     {
         if (selectedCharacter)
         {
-            selectedCharacter->DisplayCharacter();
 
             Weapon* sword = new Weapon("Sword", 50);
             Armor* armor = new Armor("Iron Plate", 25, 60);
 
 
-            selectedCharacter->GainExperience(20000);
+            //selectedCharacter->GainExperience(200);
 
             if (sword)
             {
-                selectedCharacter->EquipWeapon(sword);
-                selectedCharacter->DisplayWeapons();
+                //selectedCharacter->EquipWeapon(sword);
+                //selectedCharacter->DisplayWeapons();
             }
             if (armor)
             {
@@ -239,18 +238,23 @@ int main()
 
             }
 
+           
             /*
             selectedCharacter->TakeDamage(5);
 
+            selectedCharacter->DisplayCharacter();
+
             selectedCharacter->IncreaseHealth(3);
 
             selectedCharacter->DisplayCharacter();
 
             selectedCharacter->IncreaseHealth(3);
+           
+            selectedCharacter->DisplayCharacter();
+            
             */
 
             selectedCharacter->DisplayCharacter();
-
 
             delete sword;
             sword = nullptr;
