@@ -4,6 +4,7 @@ StatBlock::StatBlock(statusType VIT, statusType INT, statusType STR, statusType 
 	: _vit(VIT),_int(INT),_str(STR),_dex(DEX)
 {
 
+	CalculateAllPoint();
 	CalculateMaxAllPoint();
 }
 
@@ -19,8 +20,12 @@ const statusType StatBlock::GetHealthPoint() const noexcept { return healthPoint
 const statusType StatBlock::GetIntelligencePoint() const noexcept { return intelligencePoint; }
 const statusType StatBlock::GetStrengthPoint() const noexcept { return strengthPoint; }
 const statusType StatBlock::GetDexPoint() const noexcept { return durabilityPoint; }
+const statusType StatBlock::GetMaxHealthPoint() const noexcept { return maxHealthPoint; }
+const statusType StatBlock::GetMaxIntelligencePoint() const noexcept { return maxIntelligencePoint; }
+const statusType StatBlock::GetMaxStrengthPoint() const noexcept { return maxStrengthPoint; }
+const statusType StatBlock::GetMaxDexPoint() const noexcept { return maxDurabilityPoint; }
 
-void StatBlock::SetHealth(statusType value) 
+void StatBlock::SetVit(statusType value) 
 {
 	if (value < 1)
 		return;
@@ -28,14 +33,14 @@ void StatBlock::SetHealth(statusType value)
 	_vit = value; 
 
 }
-void StatBlock::SetIntelligence(statusType value)
+void StatBlock::SetInt(statusType value)
 { 
 	if (value < 1)
 		return;
 
 	_int = value; 
 }
-void StatBlock::SetStrength(statusType value)
+void StatBlock::SetStr(statusType value)
 {
 	if (value < 1)
 		return;
@@ -46,52 +51,84 @@ void StatBlock::SetDex(statusType value)
 { 
 	if (value < 1)
 		return;
+
 	_dex = value;
 }
 
 void StatBlock::SetHealthPoint(statusType value)
 {
 
-	const auto maxHp = CalculateMaxHealthPoint();
+	const auto maxHp = GetMaxHealthPoint();
 
-	if (value > maxHp) {
-
+	if (value > maxHp) 
+	{
 		healthPoint = maxHp;
 	}
-	else {
-
+	else
+	{
 		healthPoint = value;
 	}
+
+
+}
+
+const void StatBlock::CalculateAllPoint() noexcept {
+	
+	CalculateHealthPoint();
+	CalculateIntelligencePoint();
+	CalculateStrengthPoint();
+	CalculateDexPoint();
+
 
 }
 
 const void StatBlock::CalculateMaxAllPoint() noexcept {
-	healthPoint = (_vit * POINT) / 2u;
-	intelligencePoint = (_int * POINT) / 2u;
-	strengthPoint = (_str * POINT) / 2u;
-	durabilityPoint = (_dex * POINT) / 2u;
 
+	CalculateMaxHealthPoint();
+	CalculateMaxIntelligencePoint();
+	CalculateMaxStrengthPoint();
+	CalculateMaxDexPoint();
 
 }
-const statusType StatBlock::CalculateMaxHealthPoint() noexcept
+
+const void StatBlock::CalculateHealthPoint() noexcept
 {
-	return healthPoint = (_vit * POINT) / 2u;
-	
+	healthPoint = (_vit * POINT) / 2u;
+
+}
+const void StatBlock::CalculateIntelligencePoint() noexcept
+{
+	intelligencePoint = (_int * POINT) / 2u;
+
+}
+const void StatBlock::CalculateStrengthPoint() noexcept
+{
+	strengthPoint = (_str * POINT) / 2u;
+
+}
+const void StatBlock::CalculateDexPoint() noexcept
+{
+	durabilityPoint = (_dex * POINT) / 2u;
+
+}
+
+const void StatBlock::CalculateMaxHealthPoint() noexcept
+{
+	maxHealthPoint = healthPoint;
+
 }
 const void StatBlock::CalculateMaxIntelligencePoint() noexcept
 {
-	intelligencePoint = (_int * POINT) / 2u;
+	maxIntelligencePoint = intelligencePoint;
 }
 const void StatBlock::CalculateMaxStrengthPoint() noexcept
 {
-	strengthPoint = (_str * POINT) / 2u;
-	
+	maxStrengthPoint = strengthPoint;
+
 }
 
 const void StatBlock::CalculateMaxDexPoint() noexcept
 {
-	durabilityPoint = (_dex * POINT) / 2u;
+	maxDurabilityPoint = durabilityPoint;
 
 }
-
-

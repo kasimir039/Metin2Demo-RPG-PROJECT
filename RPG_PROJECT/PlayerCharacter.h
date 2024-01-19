@@ -11,32 +11,33 @@ enum STATS { VIT = 1, INT, STR,DEX };
 class PlayerCharacter : public Player
 {
 private:
-	bool checkLevel();
+	bool CheckLevel();
 	void IncreaseStats();
 
 	std::vector<Weapon*> weapons;
 	std::vector<Armor*> armors;
-
-protected:
 
 	std::string characterName;
 	KINGDOM kingdom;
 	expType experience;
 	expType requiredExperience;
 	levelType level;
-	const levelType maxLevel = 99;
-	StatBlock stats;
+	const levelType maxLevel = 99u;
 	statusType statsPoint;
 
-	PlayerCharacter() = delete;
-	PlayerCharacter(const PlayerCharacter&) = delete;
-	PlayerCharacter(const PlayerCharacter&&) = delete;
+	StatBlock stats;
 
 public:
 
 	PlayerCharacter(std::string name,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
+	
+	PlayerCharacter() = delete;
+	PlayerCharacter(const PlayerCharacter&) = delete;
+	PlayerCharacter(const PlayerCharacter&&) = delete;
+
 
 	const void DisplayCharacter() const noexcept override;
+
 	//Getters
 	const std::string GetCharacterName() const noexcept;
 	const std::string GetKingdom() const noexcept;
