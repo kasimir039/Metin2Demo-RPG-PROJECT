@@ -17,8 +17,10 @@ void CreateWarriorCharacter(PlayerCharacter*& character)
     std::cout << "(1)CHUNJO\n";
     std::cout << "(2)JINNO\n";
     std::cout << "(3)SHINSOO\n";
+
     int choice;
     std::cin>>choice;
+
     switch (choice)
     {
     case CHUNJO:
@@ -56,6 +58,7 @@ void CreateSuraCharacter(PlayerCharacter*& character)
 
     int choice;
     std::cin >> choice;
+
     switch (choice)
     {
     case CHUNJO:
@@ -91,6 +94,7 @@ void CreateShamanCharacter(PlayerCharacter*& character)
 
     int choice;
     std::cin >> choice;
+
     switch (choice)
     {
     case CHUNJO:
@@ -126,6 +130,7 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
 
     int choice;
     std::cin >> choice;
+
     switch (choice)
     {
     case CHUNJO:
@@ -155,6 +160,7 @@ void CreateMainCharacter()
     std::cout << "(2)SURA\n";
     std::cout << "(3)SHAMAN\n";
     std::cout << "(4)ASSASSIN\n";
+
     int choice;
     std::cin >> choice;
 
@@ -223,8 +229,6 @@ int main()
             Armor* armor = new Armor("Iron Plate", 25, 60);
 
 
-            //selectedCharacter->GainExperience(200);
-
             if (sword)
             {
                 //selectedCharacter->EquipWeapon(sword);
@@ -253,7 +257,8 @@ int main()
             selectedCharacter->DisplayCharacter();
             
             */
-
+            selectedCharacter->DisplayCharacter();
+            selectedCharacter->GainExperience(200);
             selectedCharacter->DisplayCharacter();
 
             delete sword;
