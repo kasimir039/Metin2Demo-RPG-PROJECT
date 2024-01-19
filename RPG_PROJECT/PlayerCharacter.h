@@ -17,19 +17,22 @@ private:
 	std::vector<Weapon*> weapons;
 	std::vector<Armor*> armors;
 
+
 	std::string characterName;
 	KINGDOM kingdom;
 	expType experience;
 	expType requiredExperience;
 	levelType level;
-	const levelType maxLevel = 99u;
 	statusType statsPoint;
+
+	const size_t maxNameLength = 12;
+	const levelType maxLevel = 99u;
 
 	StatBlock stats;
 
 public:
 
-	PlayerCharacter(std::string name,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
+	PlayerCharacter(const std::string& name,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
 	
 	PlayerCharacter() = delete;
 	PlayerCharacter(const PlayerCharacter&) = delete;

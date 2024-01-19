@@ -1,8 +1,9 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter(std::string name, KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : characterName(name),kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u) 
+PlayerCharacter::PlayerCharacter(const std::string& name, KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
+    : kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u) 
 {
+    characterName = name.substr(0, maxNameLength);
 }
 
 const std::string PlayerCharacter::GetCharacterName() const noexcept { return characterName; }
@@ -174,12 +175,13 @@ void PlayerCharacter::IncreaseStats()
 
         while (statsPoint > 0)
         {
-            int choice;
+
             std::cout << "1. VIT\n";
             std::cout << "2. INT\n";
             std::cout << "3. STR\n";
             std::cout << "4. DEX\n";
- 
+
+            int choice;
             std::cin >> choice;
 
             switch (choice)
