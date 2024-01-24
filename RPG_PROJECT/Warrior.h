@@ -5,7 +5,6 @@
 
 class Warrior final : public PlayerAbstraction
 {
-private:
 
 public:
     Warrior(Player* player);
@@ -16,7 +15,8 @@ public:
 
     void Display() const noexcept override;
 
-
+    void bodyWarriorSkills();
+    void mentalWarriorSkills();
 
 };
 

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Armor.h"
+#include "CharacterAbilities.h"
 #include <vector>
 
 enum KINGDOM { CHUNJO = 1, JINNO, SHINSOO };
@@ -16,6 +17,7 @@ private:
 
 	std::vector<Weapon*> weapons;
 	std::vector<Armor*> armors;
+
 
 
 	std::string characterName;
