@@ -1,9 +1,10 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter(const std::string& name, KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u) 
+PlayerCharacter::PlayerCharacter(const std::string& name,CHARACTER character,KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
+    : characterType(character),kingdom(kingdom), stats(VIT, INT, STR, DEX), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),w(NULL),skillScore(0)
 {
     characterName = name.substr(0, maxNameLength);
+
 }
 
 const std::string PlayerCharacter::GetCharacterName() const noexcept { return characterName; }
@@ -38,6 +39,7 @@ const void PlayerCharacter::DisplayWeapons() const
     for (const auto& weapon : weapons) {
         std::cout << weapon->GetEquipmentName() << " (Attack Power: " << weapon->GetWeaponPower() << ")\n";
     }
+
 }
 
 const void PlayerCharacter::DisplayArmor() const
@@ -74,6 +76,7 @@ const equipmentType PlayerCharacter::MinWeaponAttack() const
 
     }
 
+
     auto strengthVal = stats.GetStrengthPoint();
 
     return strengthVal;
@@ -106,6 +109,22 @@ const equipmentType PlayerCharacter::MaxArmorDefense() const
     return durabilityVal;
 }
 
+const skillType PlayerCharacter::UseAuraOfTheSword() const
+{
+    for (const auto& ability : w.Ability) {
+        if (ability->GetSkillName() == "Aura of the Sword") {
+            auto originalStr = stats.GetStrengthPoint();
+            auto attackval = ability->GetAttackPower();
+            auto newStr = originalStr + attackval;
+            return newStr;
+        }
+
+    }
+    return 0;
+
+}
+
+
 void PlayerCharacter::GainExperience(expType expAmount)
 {
     if (level < maxLevel)
@@ -113,9 +132,6 @@ void PlayerCharacter::GainExperience(expType expAmount)
         experience += expAmount;
         while (CheckLevel());
     }
-
-
-
 }
 
 void PlayerCharacter::EquipWeapon(Weapon* weapon)
@@ -269,8 +285,13 @@ bool PlayerCharacter::CheckLevel()
         requiredExperience *= EXPINCREASE;
         experience = excessExp;
         IncreaseStats();
+        skillScore++;
+
+        ChooseWarriorSkills();
+
         return true;
     }
+
 
     return false;
 }
@@ -284,7 +305,7 @@ const void PlayerCharacter::DisplayCharacter() const noexcept
         << "Status Point: " << GetStatsPoint() << '\n'
         << "VIT: " << stats.GetVit() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
         << "INT: " << stats.GetInt() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
-        << "STR: " << stats.GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
+        << "STR: " << stats.GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << "-"<< UseAuraOfTheSword() << '\n'
         << "DEX: " << stats.GetDex() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
 
 }
@@ -318,6 +339,106 @@ void PlayerCharacter::IncreaseHealth(statusType value)
     {
         stats.SetHealthPoint(hp + value);
         std::cout << "Increased Amount of Health: " << value<<'\n';
+    }
+    
+}
+
+void PlayerCharacter::ChooseWarriorSkills()
+{
+
+    if (level >= 5 && characterType == CHARACTER::WARRIOR)
+    {
+        int choice = 0;
+        bool continueLoop = true;
+
+        while (continueLoop)
+        {
+
+            std::cout << "Please specify the skill you want to choose\n\
+       1)BODY\n\
+       2)MENTAL\n";
+
+            std::cin >> choice;
+
+            switch (choice)
+            {
+            case SKILLS::BODY:
+            {
+                w.BodyWarriorSkills();
+                GetWarriorBodySkills();
+                continueLoop = false;
+                break;
+            }
+            case SKILLS::MENTAL:
+            {
+                w.MentalWarriorSkills();
+                GetWarriorMentalSkills();
+                continueLoop = false;
+                break;
+            }
+            default:
+                std::cout << "Wrong choice\n";
+                break;
+            }
+        }
+    }
+}
+
+void PlayerCharacter::GetWarriorBodySkills()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+
+
+        std::cout << "Warrior Body Skills:\n";
+        std::cout << "------------------------\n";
+        
+        w.GetAuraOfTheSword();
+        w.GetBerserk();
+        w.GetDash();
+        w.GetSwordSpin();
+        w.GetThreeWayCut();
+    }
+}
+
+void PlayerCharacter::GetWarriorMentalSkills()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        std::cout << "Warrior Mental Skills:\n";
+        std::cout << "------------------------\n";
+
+        w.GetStrongBody();
+        w.GetSpiritStrike();
+        w.GetBash();
+        w.GetStump();
+        w.GetSwordStrike();
+
+    }
+}
+
+void PlayerCharacter::UpgradeWarriorBodyAbilities()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        int choice = 0;
+        std::cout << "Choose which skills you want to develop\n";
+        std::cout << "1)Aura of The Sword\n2)Berserk\n3)Dash\n4)Sword Spin\n5)Three-Way-Cut\n";
+        std::cin >> choice;
+        while (skillScore)
+        {
+            switch (choice)
+            {
+            case WARRIOR_SKILLS::AURA_OF_THE_SWORD:
+            {
+                w.UpgradeAuraOfTheSword();
+                w.SetSkillLevel(1);
+                skillScore--;
+            }
+            default:
+                break;
+            }
+        }
     }
 
 }
