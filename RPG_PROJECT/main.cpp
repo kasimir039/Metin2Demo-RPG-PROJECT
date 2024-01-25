@@ -3,9 +3,6 @@
 
 PlayerCharacter* selectedCharacter = nullptr;
 
-enum CH{WARRIOR=1,SURA,SHAMAN,ASSASSIN};
-
-
 void CreateWarriorCharacter(PlayerCharacter*& character)
 {
     std::string name;
@@ -25,17 +22,17 @@ void CreateWarriorCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, KINGDOM::CHUNJO, 4u, 3u, 6u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::WARRIOR,KINGDOM::CHUNJO, 4u, 3u, 6u, 3u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, KINGDOM::JINNO, 4u, 3u, 6u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::WARRIOR, KINGDOM::JINNO, 4u, 3u, 6u, 3u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, KINGDOM::SHINSOO, 4u, 3u, 6u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::WARRIOR, KINGDOM::SHINSOO, 4u, 3u, 6u, 3u);
         break;
     }
     default:
@@ -63,17 +60,17 @@ void CreateSuraCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, KINGDOM::CHUNJO, 6u, 4u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::CHUNJO, 6u, 4u, 3u, 3u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, KINGDOM::JINNO, 6u, 4u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::JINNO, 6u, 4u, 3u, 3u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, KINGDOM::SHINSOO, 6u, 4u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::SHINSOO, 6u, 4u, 3u, 3u);
         break;
     }
     default:
@@ -99,17 +96,17 @@ void CreateShamanCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, KINGDOM::CHUNJO, 4u, 6u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::CHUNJO, 4u, 6u, 3u, 3u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, KINGDOM::JINNO, 4u, 6u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::JINNO, 4u, 6u, 3u, 3u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, KINGDOM::SHINSOO, 4u, 6u, 3u, 3u);
+        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::SHINSOO, 4u, 6u, 3u, 3u);
         break;
     }
     default:
@@ -135,17 +132,17 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, KINGDOM::CHUNJO, 3u, 3u, 4u, 6u);
+        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::CHUNJO, 3u, 3u, 4u, 6u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, KINGDOM::JINNO, 3u, 3u, 4u, 6u);
+        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::JINNO, 3u, 3u, 4u, 6u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, KINGDOM::SHINSOO, 3u, 3u, 4u, 6u);
+        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::SHINSOO, 3u, 3u, 4u, 6u);
         break;
     }
     default:
@@ -227,12 +224,11 @@ int main()
 
             Weapon* sword = new Weapon("Sword", 50);
             Armor* armor = new Armor("Iron Plate", 25, 60);
-
-
+                
             if (sword)
             {
-                //selectedCharacter->EquipWeapon(sword);
-                //selectedCharacter->DisplayWeapons();
+                selectedCharacter->EquipWeapon(sword);
+                selectedCharacter->DisplayWeapons();
             }
             if (armor)
             {
@@ -242,6 +238,7 @@ int main()
 
             }
 
+          
            
             /*
             selectedCharacter->TakeDamage(5);
@@ -258,8 +255,12 @@ int main()
             
             */
             selectedCharacter->DisplayCharacter();
-            selectedCharacter->GainExperience(200);
+            selectedCharacter->GainExperience(900);
+            selectedCharacter->UseAuraOfTheSword();
+            selectedCharacter->UpgradeWarriorBodyAbilities();
             selectedCharacter->DisplayCharacter();
+  
+
 
             delete sword;
             sword = nullptr;

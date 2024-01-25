@@ -6,6 +6,10 @@ class StatBlock
 private:
 	
 	static constexpr statusType POINT = 5u;
+	static constexpr statusType MAXVIT = 90u;
+	static constexpr statusType MAXINT = 90u;
+	static constexpr statusType MAXSTR = 90u;
+	static constexpr statusType MAXDEX = 90u;
 
 	statusType _vit; // VIT
 	statusType _int; // INT
@@ -22,17 +26,10 @@ private:
 	statusType maxStrengthPoint; 
 	statusType maxDurabilityPoint; 
 
-	const statusType MAXVIT = 90u;
-	const statusType MAXINT = 90u;
-	const statusType MAXSTR = 90u;
-	const statusType MAXDEX = 90u;
-
-
 public:
 
 	StatBlock(statusType VIT, statusType INT, statusType STR, statusType DEX);
-	
-	StatBlock() = delete;
+
 	StatBlock(const StatBlock&) = delete;
 	StatBlock(const StatBlock&&) = delete;
 
@@ -64,9 +61,9 @@ public:
 	void SetDex(statusType value);
 
 	void SetHealthPoint(statusType value);
-	//void SetIntelligencePoint(statusType value);
-	//void SetStrengthPoint(statusType value);
-	//void SetDurabilityPoint(statusType value);
+	void SetIntelligencePoint(statusType value);
+	void SetStrengthPoint(statusType value);
+	void SetDurabilityPoint(statusType value);
 
 	//Functions
 	const void CalculateAllPoint() noexcept;

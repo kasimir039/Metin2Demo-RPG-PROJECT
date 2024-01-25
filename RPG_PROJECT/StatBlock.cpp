@@ -72,6 +72,54 @@ void StatBlock::SetHealthPoint(statusType value)
 
 }
 
+void StatBlock::SetIntelligencePoint(statusType value)
+{
+
+	const auto maxInt = GetMaxIntelligencePoint();
+
+	if (value > maxInt)
+	{
+		intelligencePoint = maxInt;
+	}
+	else
+	{
+		intelligencePoint = value;
+	}
+
+}
+
+void StatBlock::SetStrengthPoint(statusType value)
+{
+
+	const auto maxStr = GetMaxStrengthPoint();
+
+	if (value > maxStr)
+	{
+		strengthPoint = maxStr;
+	}
+	else
+	{
+		strengthPoint = value;
+	}
+
+}
+
+void StatBlock::SetDurabilityPoint(statusType value)
+{
+
+	const auto maxDex = GetMaxDexPoint();
+
+	if (value > maxDex)
+	{
+		strengthPoint = maxDex;
+	}
+	else
+	{
+		strengthPoint = value;
+	}
+
+}
+
 const void StatBlock::CalculateAllPoint() noexcept {
 	
 	CalculateHealthPoint();
