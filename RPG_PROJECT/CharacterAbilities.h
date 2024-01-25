@@ -11,7 +11,7 @@ protected:
 
 	std::string skillName;
 	skillType attackPower;
-	skillType colldown;
+	skillType cooldown;
 	skillType requiredSp;
 	skillType duration;
 	skillType skillLevel;
@@ -25,6 +25,7 @@ protected:
 	WEAPONEFFECT  weaponEffect;
 	WEAPONEFFECT  unarmedEffect;
 
+public:
 
 	CharacterAbilities(
 		const std::string& sName,
@@ -43,9 +44,25 @@ protected:
 		WEAPONEFFECT wEffect = WEAPONEFFECT::NONE,
 		WEAPONEFFECT uEffect = WEAPONEFFECT::NONE
 	);
-	
+
+	virtual std::string GetSkillName() const noexcept = 0;
+	virtual skillType GetAttackPower()  noexcept  = 0;
+	virtual skillType GetCooldown() const noexcept  = 0;
+	virtual skillType GetSp() const noexcept = 0;
+	virtual skillType GetDuration() const noexcept = 0;
+	virtual skillType GetSkillLevel() const noexcept = 0;
+	virtual short GetMovingSpeed() const noexcept = 0;
+	virtual skillType GetAttackSpeed() const noexcept = 0;
+	virtual skillType GetAttackValue() const noexcept = 0;
+	virtual skillType GetDefence() const noexcept = 0;
+
+	virtual void SetSkillLevel(skillType lvl) = 0;
+	virtual void SetAttackPower(skillType atk) = 0;
+
+
+
 	CharacterAbilities() = delete;
-	CharacterAbilities(const CharacterAbilities&) = delete;
-	CharacterAbilities(const CharacterAbilities&&) = delete;
+	virtual ~CharacterAbilities() = default;
+
 };
 
