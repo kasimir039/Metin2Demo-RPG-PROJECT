@@ -63,6 +63,14 @@ const equipmentType PlayerCharacter::MaxWeaponAttack() const
     return 0;
 }
 
+void PlayerCharacter::ChooseSkills()
+{
+    ChooseWarriorSkills();
+    //ChooseSuraSkills;
+    //ChooseShamanSkills;
+    //ChooseAssassinSkills;
+}
+
 const equipmentType PlayerCharacter::MinWeaponAttack() const
 {
 
@@ -287,7 +295,7 @@ bool PlayerCharacter::CheckLevel()
         IncreaseStats();
         skillScore++;
 
-        ChooseWarriorSkills();
+        ChooseSkills();
 
         return true;
     }
@@ -305,7 +313,7 @@ const void PlayerCharacter::DisplayCharacter() const noexcept
         << "Status Point: " << GetStatsPoint() << '\n'
         << "VIT: " << stats.GetVit() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
         << "INT: " << stats.GetInt() << " |" << " SP:" << stats.GetIntelligencePoint() << '\n'
-        << "STR: " << stats.GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << "-"<< UseAuraOfTheSword() << '\n'
+        << "STR: " << stats.GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
         << "DEX: " << stats.GetDex() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
 
 }

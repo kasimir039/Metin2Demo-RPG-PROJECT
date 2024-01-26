@@ -45,7 +45,7 @@ void Warrior::Berserk()
 
 void Warrior::Dash()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Dash", 12, 66, 0, 0, 0, 0, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Dash", 12, 66, 0, 0, 0, 849, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
 }
 
 void Warrior::SwordSpin()
@@ -161,6 +161,7 @@ void Warrior::GetThreeWayCut() const
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
+            std::cout << "------------------------\n";
             break;
         }
     }
@@ -243,6 +244,7 @@ void Warrior::GetSwordStrike() const
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
+            std::cout << "------------------------\n";
             break;
         }
     }

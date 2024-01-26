@@ -65,6 +65,8 @@ public:
 	void TakeDamage(statusType damage);
 	void IncreaseHealth(statusType value);
 	
+	void ChooseSkills();
+
 	void ChooseWarriorSkills();
 	void GetWarriorBodySkills();
 	void GetWarriorMentalSkills();
