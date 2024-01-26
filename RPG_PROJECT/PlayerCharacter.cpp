@@ -422,7 +422,7 @@ void PlayerCharacter::UpgradeWarriorBodyAbilities()
     if (characterType == CHARACTER::WARRIOR)
     {
         int choice = 0;
-        std::cout << "Choose which skills you want to develop\n";
+        std::cout << "\nChoose which skills you want to develop\n";
         std::cout << "1)Aura of The Sword\n2)Berserk\n3)Dash\n4)Sword Spin\n5)Three-Way-Cut\n";
         std::cin >> choice;
         while (skillScore)
@@ -432,8 +432,82 @@ void PlayerCharacter::UpgradeWarriorBodyAbilities()
             case WARRIOR_SKILLS::AURA_OF_THE_SWORD:
             {
                 w.UpgradeAuraOfTheSword();
-                w.SetSkillLevel(1);
                 skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::BERSERK:
+            {
+                w.UpgradeBerserk();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::DASH:
+            {
+                w.UpgradeDash();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::SWORD_SPÝN:
+            {
+                w.UpgradeSwordSpin();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::THREE_WAY_CUT:
+            {
+                w.UpgradeThreeWayCut();
+                skillScore--;
+                break;
+            }
+            default:
+                break;
+            }
+        }
+    }
+
+}
+
+void PlayerCharacter::UpgradeWarriorMentalAbilities()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        int choice = 0;
+        std::cout << "\nChoose which skills you want to develop\n";
+        std::cout << "1)Strong Body\n2)Spirit Strike\n3)Bash\n4)tump\n5)Sword Strike\n";
+        std::cin >> choice;
+        while (skillScore)
+        {
+            switch (choice)
+            {
+            case WARRIOR_SKILLS::STRONG_BODY:
+            {
+                w.UpgradeStrongBody();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::SPIRIT_STRIKE:
+            {
+                w.UpgradeSpiritStrike();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::BASH:
+            {
+                w.UpgradeBash();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::STUMP:
+            {
+                w.UpgradeStump();
+                skillScore--;
+                break;
+            }
+            case WARRIOR_SKILLS::SWORD_STRIKE:
+            {
+                w.UpgradeSwordStrike();
+                skillScore--;
+                break;
             }
             default:
                 break;

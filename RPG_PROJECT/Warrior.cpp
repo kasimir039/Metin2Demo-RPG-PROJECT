@@ -252,8 +252,9 @@ void Warrior::UpgradeAuraOfTheSword()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Aura Of The Sword") {
-            auto val =  GetAttackPower() + 5;
-            SetAttackPower(val);
+            auto attackPower =  GetAttackPower() + 5;
+            SetAttackPower(attackPower);
+            SetSkillLevel(1);
         }
     }
 
@@ -261,24 +262,109 @@ void Warrior::UpgradeAuraOfTheSword()
 
 void Warrior::UpgradeBerserk()
 {
-    attackSpeed += 1;
-    movingSpeed += 1;
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Berserk") {
+            auto attackSpeed = GetAttackSpeed() + 1;
+            auto movingSpeed = GetMovingSpeed() + 1;
+            SetAttackSpeed(attackSpeed);
+            SetMovingSpeed(movingSpeed);
+            SetSkillLevel(1);
+        }
+    }
 }
 
 void Warrior::UpgradeDash()
 {
-    attackValue += 15;
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Dash") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
 }
 
 void Warrior::UpgradeSwordSpin()
 {
-    attackValue += 15;
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Sword Spin") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
 }
 
 void Warrior::UpgradeThreeWayCut()
 {
-    attackValue += 15;
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Three-Way Cut") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
 }
+
+void Warrior::UpgradeStrongBody()
+{
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Strong Body") {
+            auto defence = GetDefence() + 5;
+            auto movingSpeed = GetMovingSpeed() - 1;
+            SetDefence(defence);
+            SetMovingSpeed(movingSpeed);
+            SetSkillLevel(1);
+        }
+    }
+}
+
+void Warrior::UpgradeSpiritStrike()
+{
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Spirit Strike") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
+}
+
+void Warrior::UpgradeBash()
+{
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Bash") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
+}
+
+void Warrior::UpgradeStump()
+{
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Stump") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
+}
+
+void Warrior::UpgradeSwordStrike()
+{
+    for (const auto& ability : Ability) {
+        if (ability->GetSkillName() == "Sword Strike") {
+            auto attackValue = GetAttackValue() + 15;
+            SetAttackValue(attackValue);
+            SetSkillLevel(1);
+        }
+    }
+}
+
+
+
 
 
 

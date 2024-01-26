@@ -8,9 +8,9 @@
 
 enum CHARACTER { WARRIOR = 1, SURA, SHAMAN, ASSASSIN };
 enum KINGDOM { CHUNJO = 1, JINNO, SHINSOO };
-enum STATS { VIT = 1, INT, STR,DEX };
-enum SKILLS{BODY = 1,MENTAL};
-enum WARRIOR_SKILLS{AURA_OF_THE_SWORD = 1,BERSERK,DASH,SWORD_SPÝN,THREE_WAY_CUT};
+enum STATS { VIT = 1, INT, STR, DEX };
+enum SKILLS { BODY = 1, MENTAL };
+enum WARRIOR_SKILLS { AURA_OF_THE_SWORD = 1, BERSERK, DASH, SWORD_SPÝN, THREE_WAY_CUT, STRONG_BODY, SPIRIT_STRIKE, BASH, STUMP, SWORD_STRIKE };
 
 
 class PlayerCharacter : public Player
@@ -70,6 +70,7 @@ public:
 	void GetWarriorMentalSkills();
 	
 	void UpgradeWarriorBodyAbilities();
+	void UpgradeWarriorMentalAbilities();
 
 	const skillType UseAuraOfTheSword() const;
 

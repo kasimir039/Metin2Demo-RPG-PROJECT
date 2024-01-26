@@ -49,13 +49,18 @@ public:
     void GetStump() const;
     void GetSwordStrike() const;
 
-
     //Upgrade Skills
     void UpgradeAuraOfTheSword();
     void UpgradeBerserk();
     void UpgradeDash();
     void UpgradeSwordSpin();
     void UpgradeThreeWayCut();
+
+    void UpgradeStrongBody();
+    void UpgradeSpiritStrike();
+    void UpgradeBash();
+    void UpgradeStump();
+    void UpgradeSwordStrike();
 
 
 
