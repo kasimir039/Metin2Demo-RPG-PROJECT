@@ -39,6 +39,10 @@ public:
     skillType GetDefence() const noexcept override;
     
     void SetSkillLevel(skillType lvl) override;
-    void SetAttackPower(skillType atk) override;
+    void SetAttackPower(skillType atkPower) override;
+    void SetAttackSpeed(skillType aSpeed) override;
+    void SetMovingSpeed(skillType mSpeed) override;
+    void SetAttackValue(skillType atkValue) override;
+    void SetDefence(skillType def) override;
 
 };

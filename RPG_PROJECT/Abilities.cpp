@@ -37,7 +37,27 @@ void Abilities::SetSkillLevel(skillType lvl)
     skillLevel += lvl;
 }
 
-void Abilities::SetAttackPower(skillType atk)
+void Abilities::SetAttackPower(skillType atkPower)
 {
-    attackPower = atk;
+    attackPower = atkPower;
+}
+
+void Abilities::SetAttackSpeed(skillType aSpeed)
+{
+    attackSpeed = aSpeed;
+}
+
+void Abilities::SetMovingSpeed(skillType mSpeed)
+{
+    movingSpeed = mSpeed;
+}
+
+void Abilities::SetAttackValue(skillType atkValue)
+{
+    attackValue = atkValue;
+}
+
+void Abilities::SetDefence(skillType def)
+{
+    defence = def;
 }

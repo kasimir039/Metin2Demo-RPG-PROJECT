@@ -57,7 +57,11 @@ public:
 	virtual skillType GetDefence() const noexcept = 0;
 
 	virtual void SetSkillLevel(skillType lvl) = 0;
-	virtual void SetAttackPower(skillType atk) = 0;
+	virtual void SetAttackPower(skillType atkPower) = 0;
+	virtual void SetAttackSpeed(skillType aSpeed) = 0;
+	virtual void SetMovingSpeed(skillType mSpeed) = 0;
+	virtual void SetAttackValue(skillType atkValue) = 0;
+	virtual void SetDefence(skillType def) = 0;
 
 
 
