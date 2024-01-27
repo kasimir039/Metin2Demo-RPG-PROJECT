@@ -227,8 +227,8 @@ int main()
                 
             if (sword)
             {
-                selectedCharacter->EquipWeapon(sword);
-                selectedCharacter->DisplayWeapons();
+                //selectedCharacter->EquipWeapon(sword);
+                //selectedCharacter->DisplayWeapons();
             }
             if (armor)
             {
@@ -261,7 +261,7 @@ int main()
 
             selectedCharacter->DisplayCharacter();
 
-            selectedCharacter->UpgradeWarriorBodyAbilities();
+            //selectedCharacter->UpgradeWarriorBodyAbilities();
 
             selectedCharacter->DisplayCharacter();
   
