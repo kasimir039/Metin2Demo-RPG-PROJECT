@@ -22,15 +22,15 @@ Abilities::Abilities(
 }
 
 std::string Abilities::GetSkillName() const noexcept{ return skillName; }
-skillType Abilities::GetAttackPower()  noexcept{ return attackPower; }
+skillType Abilities::GetAttackPower() noexcept{ return attackPower; }
 skillType Abilities::GetCooldown() const noexcept{ return cooldown; }
-skillType Abilities::GetSp() const noexcept{ return requiredSp; }
-skillType Abilities::GetDuration() const noexcept{ return duration; }
-skillType Abilities::GetSkillLevel() const noexcept{ return skillLevel; }
-short Abilities::GetMovingSpeed() const noexcept{ return movingSpeed; }
-skillType Abilities::GetAttackSpeed() const noexcept{ return attackSpeed; }
-skillType Abilities::GetAttackValue() const noexcept{ return attackValue; }
-skillType Abilities::GetDefence() const noexcept{ return defence; }
+skillType Abilities::GetSp() noexcept{ return requiredSp; }
+skillType Abilities::GetDuration() noexcept{ return duration; }
+skillType Abilities::GetSkillLevel() noexcept{ return skillLevel; }
+short Abilities::GetMovingSpeed() noexcept{ return movingSpeed; }
+skillType Abilities::GetAttackSpeed() noexcept{ return attackSpeed; }
+skillType Abilities::GetAttackValue() noexcept{ return attackValue; }
+skillType Abilities::GetDefence() noexcept{ return defence; }
 
 void Abilities::SetSkillLevel(skillType lvl)
 {
@@ -39,25 +39,25 @@ void Abilities::SetSkillLevel(skillType lvl)
 
 void Abilities::SetAttackPower(skillType atkPower)
 {
-    attackPower = atkPower;
+    attackPower += atkPower;
 }
 
 void Abilities::SetAttackSpeed(skillType aSpeed)
 {
-    attackSpeed = aSpeed;
+    attackSpeed += aSpeed;
 }
 
 void Abilities::SetMovingSpeed(skillType mSpeed)
 {
-    movingSpeed = mSpeed;
+    movingSpeed += mSpeed;
 }
 
 void Abilities::SetAttackValue(skillType atkValue)
 {
-    attackValue = atkValue;
+    attackValue += atkValue;
 }
 
 void Abilities::SetDefence(skillType def)
 {
-    defence = def;
+    defence += def;
 }

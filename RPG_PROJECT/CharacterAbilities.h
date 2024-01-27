@@ -46,15 +46,15 @@ public:
 	);
 
 	virtual std::string GetSkillName() const noexcept = 0;
-	virtual skillType GetAttackPower()  noexcept  = 0;
+	virtual skillType GetAttackPower() noexcept  = 0;
 	virtual skillType GetCooldown() const noexcept  = 0;
-	virtual skillType GetSp() const noexcept = 0;
-	virtual skillType GetDuration() const noexcept = 0;
-	virtual skillType GetSkillLevel() const noexcept = 0;
-	virtual short GetMovingSpeed() const noexcept = 0;
-	virtual skillType GetAttackSpeed() const noexcept = 0;
-	virtual skillType GetAttackValue() const noexcept = 0;
-	virtual skillType GetDefence() const noexcept = 0;
+	virtual skillType GetSp() noexcept = 0;
+	virtual skillType GetDuration() noexcept = 0;
+	virtual skillType GetSkillLevel() noexcept = 0;
+	virtual short GetMovingSpeed() noexcept = 0;
+	virtual skillType GetAttackSpeed() noexcept = 0;
+	virtual skillType GetAttackValue() noexcept = 0;
+	virtual skillType GetDefence() noexcept = 0;
 
 	virtual void SetSkillLevel(skillType lvl) = 0;
 	virtual void SetAttackPower(skillType atkPower) = 0;

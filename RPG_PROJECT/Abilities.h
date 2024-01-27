@@ -28,15 +28,15 @@ public:
 
 
     std::string GetSkillName() const noexcept override;
-    skillType GetAttackPower()  noexcept override;
+    skillType GetAttackPower() noexcept override;
     skillType GetCooldown() const noexcept override;
-    skillType GetSp() const noexcept override;
-    skillType GetDuration() const noexcept override;
-    skillType GetSkillLevel() const noexcept override;
-    short GetMovingSpeed() const noexcept override;
-    skillType GetAttackSpeed() const noexcept override;
-    skillType GetAttackValue() const noexcept override;
-    skillType GetDefence() const noexcept override;
+    skillType GetSp() noexcept override;
+    skillType GetDuration() noexcept override;
+    skillType GetSkillLevel() noexcept override;
+    short GetMovingSpeed() noexcept override;
+    skillType GetAttackSpeed() noexcept override;
+    skillType GetAttackValue() noexcept override;
+    skillType GetDefence() noexcept override;
     
     void SetSkillLevel(skillType lvl) override;
     void SetAttackPower(skillType atkPower) override;
