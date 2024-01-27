@@ -437,13 +437,6 @@ void PlayerCharacter::GetWarriorMentalSkills() const noexcept
     }
 }
 
-void PlayerCharacter::SetStrengthPointAndAttackValue(statusType val)
-{
-    stats->SetStrengthPoint(val);
-    w.SetAttackPower(val);
-
-}
-
 
 void PlayerCharacter::UpgradeWarriorBodyAbilities()
 {
@@ -451,7 +444,6 @@ void PlayerCharacter::UpgradeWarriorBodyAbilities()
     {
         while (skillScore)
         {
-
         std::cout << "\nChoose which skills you want to develop\n";
         std::cout << "1)Aura of The Sword\n2)Berserk\n3)Dash\n4)Sword Spin\n5)Three-Way-Cut\n";
         int choice = 0;
@@ -505,9 +497,9 @@ void PlayerCharacter::UpgradeWarriorMentalAbilities()
     {
         while (skillScore)
         {
-        int choice = 0;
         std::cout << "\nChoose which skills you want to develop\n";
         std::cout << "1)Strong Body\n2)Spirit Strike\n3)Bash\n4)tump\n5)Sword Strike\n";
+        int choice = 0;
         std::cin >> choice;
 
             switch (choice)

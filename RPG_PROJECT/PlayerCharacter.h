@@ -69,8 +69,6 @@ public:
 	void IncreaseHealth(statusType value);
 	void ChooseSkills();
 
-	void SetStrengthPointAndAttackValue(statusType val);
-
 	const void DisplayWeapons() const;
 	const void DisplayArmor() const;
 	const equipmentType MaxWeaponAttack();
