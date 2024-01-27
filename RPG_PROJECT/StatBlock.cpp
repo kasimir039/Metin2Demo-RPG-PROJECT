@@ -8,10 +8,10 @@ StatBlock::StatBlock(statusType VIT, statusType INT, statusType STR, statusType 
 	CalculateMaxAllPoint();
 }
 
-const statusType StatBlock::GetVit() const noexcept { return _vit; }
-const statusType StatBlock::GetInt() const noexcept { return _int; }
-const statusType StatBlock::GetStr() const noexcept { return _str; }
-const statusType StatBlock::GetDex() const noexcept { return _dex; }
+const statusType StatBlock::GetVit() noexcept { return _vit; }
+const statusType StatBlock::GetInt() noexcept { return _int; }
+const statusType StatBlock::GetStr() noexcept { return _str; }
+const statusType StatBlock::GetDex() noexcept { return _dex; }
 const statusType StatBlock::GetMaxVit() const noexcept { return MAXVIT; }
 const statusType StatBlock::GetMaxInt() const noexcept { return MAXINT; }
 const statusType StatBlock::GetMaxStr() const noexcept { return MAXSTR; }
@@ -88,8 +88,9 @@ void StatBlock::SetIntelligencePoint(statusType value)
 
 }
 
-void StatBlock::SetStrengthPoint(statusType value)
+void StatBlock::SetStrengthPoint(statusType value) 
 {
+
 
 	const auto maxStr = GetMaxStrengthPoint();
 

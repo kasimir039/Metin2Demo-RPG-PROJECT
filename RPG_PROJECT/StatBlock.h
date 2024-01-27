@@ -34,10 +34,10 @@ public:
 	StatBlock(const StatBlock&&) = delete;
 
 	//Getters
-	const statusType GetVit() const noexcept;
-	const statusType GetInt() const noexcept;
-	const statusType GetStr() const noexcept;
-	const statusType GetDex() const noexcept;
+	const statusType GetVit() noexcept;
+	const statusType GetInt() noexcept;
+	const statusType GetStr() noexcept;
+	const statusType GetDex() noexcept;
 
 	const statusType GetMaxVit() const noexcept;
 	const statusType GetMaxInt() const noexcept;
@@ -64,6 +64,7 @@ public:
 	void SetIntelligencePoint(statusType value);
 	void SetStrengthPoint(statusType value);
 	void SetDurabilityPoint(statusType value);
+
 
 	//Functions
 	const void CalculateAllPoint() noexcept;
