@@ -256,8 +256,13 @@ int main()
             */
             selectedCharacter->DisplayCharacter();
             selectedCharacter->GainExperience(900);
-            //selectedCharacter->UseAuraOfTheSword();
-            //selectedCharacter->UpgradeWarriorBodyAbilities();
+
+            selectedCharacter->UseAuraOfTheSword();
+
+            selectedCharacter->DisplayCharacter();
+
+            selectedCharacter->UpgradeWarriorBodyAbilities();
+
             selectedCharacter->DisplayCharacter();
   
 
