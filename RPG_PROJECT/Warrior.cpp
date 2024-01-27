@@ -253,10 +253,11 @@ void Warrior::GetSwordStrike() const
 void Warrior::UpgradeAuraOfTheSword()
 {
     for (const auto& ability : Ability) {
-        if (ability->GetSkillName() == "Aura Of The Sword") {
-            auto attackPower =  GetAttackPower() + 5;
-            SetAttackPower(attackPower);
-            SetSkillLevel(1);
+        if (ability->GetSkillName() == "Aura of the Sword") {
+            
+            ability->SetAttackPower(5);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 
@@ -266,11 +267,11 @@ void Warrior::UpgradeBerserk()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Berserk") {
-            auto attackSpeed = GetAttackSpeed() + 1;
-            auto movingSpeed = GetMovingSpeed() + 1;
-            SetAttackSpeed(attackSpeed);
-            SetMovingSpeed(movingSpeed);
-            SetSkillLevel(1);
+          
+            ability->SetAttackSpeed(1);
+            ability->SetMovingSpeed(1);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -279,9 +280,10 @@ void Warrior::UpgradeDash()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Dash") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+           
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -290,9 +292,10 @@ void Warrior::UpgradeSwordSpin()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Sword Spin") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+           
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -301,9 +304,9 @@ void Warrior::UpgradeThreeWayCut()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Three-Way Cut") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+            
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
         }
     }
 }
@@ -312,11 +315,11 @@ void Warrior::UpgradeStrongBody()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Strong Body") {
-            auto defence = GetDefence() + 5;
-            auto movingSpeed = GetMovingSpeed() - 1;
-            SetDefence(defence);
-            SetMovingSpeed(movingSpeed);
-            SetSkillLevel(1);
+           
+            ability->SetDefence(5);
+            ability->SetMovingSpeed(-1);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -325,9 +328,10 @@ void Warrior::UpgradeSpiritStrike()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Spirit Strike") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+           
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -336,9 +340,10 @@ void Warrior::UpgradeBash()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Bash") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+            
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -347,9 +352,10 @@ void Warrior::UpgradeStump()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Stump") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+            
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
@@ -358,9 +364,10 @@ void Warrior::UpgradeSwordStrike()
 {
     for (const auto& ability : Ability) {
         if (ability->GetSkillName() == "Sword Strike") {
-            auto attackValue = GetAttackValue() + 15;
-            SetAttackValue(attackValue);
-            SetSkillLevel(1);
+            
+            ability->SetAttackValue(15);
+            ability->SetSkillLevel(1);
+            break;
         }
     }
 }
