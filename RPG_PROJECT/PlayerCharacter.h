@@ -19,9 +19,11 @@ private:
 	bool CheckLevel();
 	void IncreaseStats();
 
+	void ChooseWarriorSkills();
+
 	std::vector<Weapon*> weapons;
 	std::vector<Armor*> armors;
-	StatBlock stats;
+	StatBlock* stats = nullptr;
 	Warrior w;
 
 	std::string characterName;
@@ -32,8 +34,6 @@ private:
 	levelType level;
 	statusType statsPoint;
 	skillType skillScore;
-
-
 
 	static constexpr size_t maxNameLength = 12;
 	static constexpr levelType maxLevel = 99u;
@@ -47,8 +47,7 @@ public:
 	PlayerCharacter(const PlayerCharacter&) = delete;
 	PlayerCharacter(const PlayerCharacter&&) = delete;
 
-
-	const void DisplayCharacter() const noexcept override;
+	~PlayerCharacter();
 
 	//Getters
 	const std::string GetCharacterName() const noexcept;
@@ -57,31 +56,37 @@ public:
 	const expType GetRequiredExp() const noexcept;
 	const levelType GetLevel() const noexcept;
 	const statusType GetStatsPoint() const noexcept;
+
+	void GetWarriorBodySkills() const noexcept;
+	void GetWarriorMentalSkills() const noexcept;
 	
 	//Functions
+	const void DisplayCharacter() noexcept override;
 	void GainExperience(expType exp);
 	void EquipWeapon(Weapon* weapon);
 	void EquipArmor(Armor* armor);
 	void TakeDamage(statusType damage);
 	void IncreaseHealth(statusType value);
-	
 	void ChooseSkills();
 
-	void ChooseWarriorSkills();
-	void GetWarriorBodySkills();
-	void GetWarriorMentalSkills();
-	
-	void UpgradeWarriorBodyAbilities();
-	void UpgradeWarriorMentalAbilities();
-
-	const skillType UseAuraOfTheSword() const;
+	void SetStrengthPointAndAttackValue(statusType val);
 
 	const void DisplayWeapons() const;
 	const void DisplayArmor() const;
-	const equipmentType MaxWeaponAttack() const;
-	const equipmentType MinWeaponAttack() const;
-	const equipmentType MaxArmorHealthPoint() const;
-	const equipmentType MaxArmorDefense() const;
+	const equipmentType MaxWeaponAttack();
+	const equipmentType MinWeaponAttack();
+	const equipmentType MaxArmorHealthPoint();
+	const equipmentType MaxArmorDefense();
+
+	//Warrior
+	void UpgradeWarriorBodyAbilities();
+	void UpgradeWarriorMentalAbilities();
+
+	const bool UseAuraOfTheSword();
+	const skillType UseBerserk();
+
+
+
 
 };
 
