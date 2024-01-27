@@ -63,10 +63,9 @@ const equipmentType PlayerCharacter::MaxWeaponAttack()
     if (!weapons.empty())
     {
         totalAttackPower = Weapon::GetWeaponPower() + stats->GetStrengthPoint();
-       
     }
 
-    if (UseAuraOfTheSword()) {
+    if (UseAuraOfTheSword() && !weapons.empty()) {
         for (const auto& ability : w.Ability) {
             if (ability->GetSkillName() == "Aura of the Sword") {
                 totalAttackPower += ability->GetAttackPower();
