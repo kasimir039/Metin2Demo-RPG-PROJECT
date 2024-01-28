@@ -361,7 +361,7 @@ void PlayerCharacter::IncreaseHealth(statusType value)
 void PlayerCharacter::ChooseSkills()
 {
     ChooseWarriorSkills();
-    ChooseSuraSkills;
+    ChooseSuraSkills();
     //ChooseShamanSkills;
     //ChooseAssassinSkills;
 }
