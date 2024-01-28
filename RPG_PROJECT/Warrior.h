@@ -3,6 +3,9 @@
 #include "Abilities.h"
 #include <memory>
 
+enum WARRIOR_SKILLS { AURA_OF_THE_SWORD = 1, BERSERK, DASH, SWORD_SPÝN, THREE_WAY_CUT, STRONG_BODY, SPIRIT_STRIKE_WARRIOR, BASH, STUMP, SWORD_STRIKE };
+enum CHOOSE_WARRIOR_SKILLS { BODY = 1, MENTAL };
+
 class Warrior final : public PlayerAbstraction,public Abilities
 {
 private:

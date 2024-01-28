@@ -3,6 +3,9 @@
 #include "Abilities.h"
 #include <memory>
 
+enum SURA_SKILLS { DARK_PROTECTION = 1, FLAME_SPIRIT, DARK_ORB, DARK_STRIKE, FLAME_STRIKE, SPIRIT_STRIKE_SURA, ENCHANTED_BLADE, ENCHANTED_ARMOUR, DISPEL, DRAGON_SWIRL, FEAR, FINGER_STRIKE };
+enum CHOOSE_SURA_SKILLS { BLACK_MAGIC = 1, WEAPONARY };
+
 
 class Sura final : public PlayerAbstraction,public Abilities
 {

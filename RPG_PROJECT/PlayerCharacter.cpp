@@ -385,14 +385,14 @@ void PlayerCharacter::ChooseWarriorSkills()
 
             switch (choice)
             {
-            case SKILLS::BODY:
+            case CHOOSE_WARRIOR_SKILLS::BODY:
             {
                 warrior.BodyWarriorSkills();
                 GetWarriorBodySkills();
                 continueLoop = false;
                 break;
             }
-            case SKILLS::MENTAL:
+            case CHOOSE_WARRIOR_SKILLS::MENTAL:
             {
                 warrior.MentalWarriorSkills();
                 GetWarriorMentalSkills();
@@ -692,14 +692,14 @@ void PlayerCharacter::ChooseSuraSkills()
 
             switch (choice)
             {
-            case SKILLS::BLACK_MAGIC:
+            case CHOOSE_SURA_SKILLS::BLACK_MAGIC:
             {
                 sura.SuraBlackMagicSkills();
                 GetSuraBlackMagicSkills();
                 continueLoop = false;
                 break;
             }
-            case SKILLS::WEAPONARY:
+            case CHOOSE_SURA_SKILLS::WEAPONARY:
             {
                 sura.SuraWeaponarySkills();
                 GetSuraWeaponarySkills();
