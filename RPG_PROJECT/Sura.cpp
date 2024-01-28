@@ -123,7 +123,7 @@ void Sura::GetDarkProtection() const
     {
         if (ability->GetSkillName() == "Dark Protection")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Defence: " << ability->GetDefence() << "\n";
@@ -141,7 +141,7 @@ void Sura::GetDarkStrike() const
     {
         if (ability->GetSkillName() == "Dark Strike")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
@@ -158,7 +158,7 @@ void Sura::GetFlameSpirit() const
     {
         if (ability->GetSkillName() == "Flame Spirit")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
@@ -175,7 +175,7 @@ void Sura::GetFlameStrike() const
     {
         if (ability->GetSkillName() == "Flame Strike")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
@@ -192,12 +192,13 @@ void Sura::GetSpiritStrike() const
     {
         if (ability->GetSkillName() == "Spirit Strike")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
+            std::cout << "------------------------\n";
             break;
         }
     }
@@ -209,7 +210,7 @@ void Sura::GetDispel() const
     {
         if (ability->GetSkillName() == "Dispel")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
@@ -226,7 +227,7 @@ void Sura::GetDragonSwirl() const
     {
         if (ability->GetSkillName() == "Dragon Swirl")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
@@ -243,7 +244,7 @@ void Sura::GetEnchantedArmour() const
     {
         if (ability->GetSkillName() == "Enchanted Armour")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Defence: " << ability->GetDefence() << "\n";
@@ -261,7 +262,7 @@ void Sura::GetEnchtantedBlade() const
     {
         if (ability->GetSkillName() == "Enchanted Blade")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Power: " << ability->GetAttackPower() << "\n";
@@ -280,7 +281,7 @@ void Sura::GetFear() const
     {
         if (ability->GetSkillName() == "Fear")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
@@ -297,12 +298,13 @@ void Sura::GetFingerStrike() const
     {
         if (ability->GetSkillName() == "Finger Strike")
         {
-
+            std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
             std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
+            std::cout << "------------------------\n";
             break;
         }
     }
