@@ -36,6 +36,7 @@ private:
 	statusType statsPoint;
 	skillType skillScore;
 
+	bool checkSkill;
 	static constexpr size_t maxNameLength = 12;
 	static constexpr levelType maxLevel = 99u;
 
@@ -66,6 +67,7 @@ public:
 	void TakeDamage(statusType damage);
 	void IncreaseHealth(statusType value);
 	void ChooseSkills();
+	void SetCheckSkills(bool value);
 
 	const void DisplayWeapons() const;
 	const void DisplayArmor() const;

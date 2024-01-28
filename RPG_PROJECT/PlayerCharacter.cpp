@@ -1,7 +1,7 @@
 #include "PlayerCharacter.h"
 
 PlayerCharacter::PlayerCharacter(const std::string& name,CHARACTER character,KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : characterType(character),kingdom(kingdom), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),warrior(NULL),skillScore(0),sura(NULL)
+    : characterType(character),kingdom(kingdom), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),warrior(NULL),skillScore(0),sura(NULL),checkSkill(false)
 {
     characterName = name.substr(0, maxNameLength);
     stats = new StatBlock(VIT, INT, STR, DEX);  
@@ -65,9 +65,19 @@ const equipmentType PlayerCharacter::MaxWeaponAttack()
         totalAttackPower = Weapon::GetWeaponPower() + stats->GetStrengthPoint();
     }
 
-    if (UseAuraOfTheSword() && !weapons.empty()) {
+    if (UseAuraOfTheSword() && !weapons.empty() && checkSkill)   {
         for (const auto& ability : warrior.Ability) {
             if (ability->GetSkillName() == "Aura of the Sword") {
+                totalAttackPower += ability->GetAttackPower();
+                break;
+            }
+        }
+    }
+
+    if (UseEnchantedBlade() && !weapons.empty() && checkSkill)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Enchanted Blade") {
                 totalAttackPower += ability->GetAttackPower();
                 break;
             }
@@ -125,7 +135,7 @@ const equipmentType PlayerCharacter::MaxArmorDefense()
 
     }
 
-    if (UseStrongBody())
+    if (UseStrongBody() && checkSkill)
     {
         for (const auto& ability : warrior.Ability) {
             if (ability->GetSkillName() == "Strong Body") {
@@ -134,6 +144,27 @@ const equipmentType PlayerCharacter::MaxArmorDefense()
             }
         }
     }
+
+    if (UseDarkProtection() && checkSkill)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dark Protection") {
+                totalDefence += ability->GetDefence();
+                break;
+            }
+        }
+    }
+
+    if (UseEnchantedArmour() && checkSkill)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Enchanted Armour") {
+                totalDefence += ability->GetDefence();
+                break;
+            }
+        }
+    }
+
 
     return totalDefence;
 }
@@ -364,6 +395,11 @@ void PlayerCharacter::ChooseSkills()
     ChooseSuraSkills();
     //ChooseShamanSkills;
     //ChooseAssassinSkills;
+}
+
+void PlayerCharacter::SetCheckSkills(bool value)
+{
+    checkSkill = value;
 }
 
 void PlayerCharacter::ChooseWarriorSkills()
@@ -867,5 +903,158 @@ void PlayerCharacter::UpgradeSuraWeaponarySkills()
     }
 }
 
+const bool PlayerCharacter::UseDarkOrb()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dark Orb") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
+const bool PlayerCharacter::UseDarkProtection()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dark Protection") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
+const bool PlayerCharacter::UseDarkStrike()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dark Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseFlameSpirit()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Flame Spirit") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseFlameStrike()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Flame Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseSpiritStrikeSura()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Spirit Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseDispel()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dispel") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseDragonSwirl()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dragon Swirl") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseEnchantedArmour()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Enchanted Armour") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseEnchantedBlade()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Enchanted Blade") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseFear()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Fear") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseFingerStrike()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Finger Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
