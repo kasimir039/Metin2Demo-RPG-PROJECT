@@ -21,15 +21,16 @@ private:
     void Stump();
     void SwordStrike();
 
-public:
-    std::vector<std::unique_ptr<Abilities>> Ability;
     StatBlock* stats;
 
+public:
     Warrior(Player* player);
 
     Warrior() = delete;
     Warrior(const Warrior&) = delete;
     Warrior(const Warrior&&) = delete;
+
+    std::vector<std::unique_ptr<Abilities>> Ability;
 
     //Function
     void Display() const noexcept override;

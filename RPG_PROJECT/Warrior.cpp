@@ -35,52 +35,52 @@ void Warrior::MentalWarriorSkills()
 
 void Warrior::AuraOfTheSword()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Aura of the Sword", 35, 110, 25, 32, 0, 0, 0, 0, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON)); // Strength (++)
+    Ability.emplace_back(std::make_unique<Abilities>("Aura of the Sword", 35, 110, 25, 32, 0, 0, 0, 0, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON));
 }
 
 void Warrior::Berserk()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Berserk", 67, 57, 0, 64, 0, 0, 2, 1, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Berserk", 67, 57, 0, 64, 0, 0, 2, 1, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); 
 }
 
 void Warrior::Dash()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Dash", 12, 66, 0, 0, 0, 849, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Dash", 12, 66, 0, 0, 0, 849, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON)); 
 }
 
 void Warrior::SwordSpin()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Sword Spin", 15, 56, 0, 0, 0, 1226, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Sword Spin", 15, 56, 0, 0, 0, 1226, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); 
 }
 
 void Warrior::ThreeWayCut()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Three-Way Cut", 12, 45, 0, 0, 0, 1336, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Three-Way Cut", 12, 45, 0, 0, 0, 1336, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); 
 }
 
 void Warrior::StrongBody()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Strong Body", 67, 91, 0, 64, 13, 0, 0, -1, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); // Vitality (++), Strength (+)
+    Ability.emplace_back(std::make_unique<Abilities>("Strong Body", 67, 91, 0, 64, 13, 0, 0, -1, 1, ABILITYTARGET::SELF, ABILITYTARGET::NONE, ABILITYTARGET::NONE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); 
 }
 
 void Warrior::SpiritStrike()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Spirit Strike", 15, 66, 0, 0, 0, 997, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Spirit Strike", 15, 66, 0, 0, 0, 997, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); 
 }
 
 void Warrior::Bash()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Bash", 15, 67, 0, 0, 0, 987, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Bash", 15, 67, 0, 0, 0, 987, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON));
 }
 
 void Warrior::Stump()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Stump", 25, 57, 0, 0, 0, 855, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Stump", 25, 57, 0, 0, 0, 855, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON, WEAPONEFFECT::UNARMED)); 
 }
 
 void Warrior::SwordStrike()
 {
-    Ability.emplace_back(std::make_unique<Abilities>("Sword Strike", 20, 46, 0, 0, 0, 840, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); // Strength (++), Dexterity (+), Vitality (0/+)
+    Ability.emplace_back(std::make_unique<Abilities>("Sword Strike", 20, 46, 0, 0, 0, 840, 0, 0, 1, ABILITYTARGET::NONE, ABILITYTARGET::ENEMY, ABILITYTARGET::MULTIPLE, WEAPONEFFECT::WEAPON)); 
 }
 
 void Warrior::GetAuraOfTheSword() const
@@ -91,6 +91,7 @@ void Warrior::GetAuraOfTheSword() const
         {
 
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Power: " << ability->GetAttackPower() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "Duration: " << ability->GetDuration() << "\n";
@@ -108,6 +109,7 @@ void Warrior::GetBerserk() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Speed: " << ability->GetAttackSpeed() << "\n";
             std::cout << "Moving Speed: " << ability->GetMovingSpeed() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
@@ -126,6 +128,7 @@ void Warrior::GetDash() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -142,6 +145,7 @@ void Warrior::GetSwordSpin() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -158,6 +162,7 @@ void Warrior::GetThreeWayCut() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -175,6 +180,7 @@ void Warrior::GetStrongBody() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Defence: " << ability->GetDefence() << "\n";
             std::cout << "Moving Speed: " << ability->GetMovingSpeed() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
@@ -193,6 +199,7 @@ void Warrior::GetSpiritStrike() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -209,6 +216,7 @@ void Warrior::GetBash() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -225,6 +233,7 @@ void Warrior::GetStump() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
@@ -241,6 +250,7 @@ void Warrior::GetSwordStrike() const
         {
             std::cout << "------------------------\n";
             std::cout << "Ability Name: " << ability->GetSkillName() << "\n";
+            std::cout << "Skill Level: " << ability->GetSkillLevel() << "\n";
             std::cout << "Attack Value: " << ability->GetAttackValue() << "\n";
             std::cout << "Cooldown: " << ability->GetCooldown() << "\n";
             std::cout << "SP Required: " << ability->GetSp() << "\n";
