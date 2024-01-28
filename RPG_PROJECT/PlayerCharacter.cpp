@@ -1,7 +1,7 @@
 #include "PlayerCharacter.h"
 
 PlayerCharacter::PlayerCharacter(const std::string& name,CHARACTER character,KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : characterType(character),kingdom(kingdom), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),w(NULL),skillScore(0)
+    : characterType(character),kingdom(kingdom), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),warrior(NULL),skillScore(0),sura(NULL)
 {
     characterName = name.substr(0, maxNameLength);
     stats = new StatBlock(VIT, INT, STR, DEX);  
@@ -66,7 +66,7 @@ const equipmentType PlayerCharacter::MaxWeaponAttack()
     }
 
     if (UseAuraOfTheSword() && !weapons.empty()) {
-        for (const auto& ability : w.Ability) {
+        for (const auto& ability : warrior.Ability) {
             if (ability->GetSkillName() == "Aura of the Sword") {
                 totalAttackPower += ability->GetAttackPower();
                 break;
@@ -111,28 +111,32 @@ const equipmentType PlayerCharacter::MaxArmorHealthPoint()
 
 const equipmentType PlayerCharacter::MaxArmorDefense()
 {
+
+    auto totalDefence = 0;
+
     if (!armors.empty())
     {
-        auto value = Armor::GetArmorDef() + stats->GetDexPoint();
-        return value;
+        totalDefence = Armor::GetArmorDef() + stats->GetDexPoint();
+
+    }
+    else if(armors.empty())
+    {
+        totalDefence = stats->GetDexPoint();
+
     }
 
-    auto durabilityVal = stats->GetDexPoint();
-
-    return durabilityVal;
-}
-
-const bool PlayerCharacter::UseAuraOfTheSword() 
-{
-    for (const auto& ability : w.Ability) {
-        if (ability->GetSkillName() == "Aura of the Sword") {
-            return true;
+    if (UseStrongBody())
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Strong Body") {
+                totalDefence += ability->GetDefence();
+                break;
+            }
         }
     }
-    return false;
 
+    return totalDefence;
 }
-
 
 void PlayerCharacter::GainExperience(expType expAmount)
 {
@@ -383,14 +387,14 @@ void PlayerCharacter::ChooseWarriorSkills()
             {
             case SKILLS::BODY:
             {
-                w.BodyWarriorSkills();
+                warrior.BodyWarriorSkills();
                 GetWarriorBodySkills();
                 continueLoop = false;
                 break;
             }
             case SKILLS::MENTAL:
             {
-                w.MentalWarriorSkills();
+                warrior.MentalWarriorSkills();
                 GetWarriorMentalSkills();
                 continueLoop = false;
                 break;
@@ -412,11 +416,11 @@ void PlayerCharacter::GetWarriorBodySkills() const noexcept
         std::cout << "Warrior Body Skills:\n";
         std::cout << "------------------------\n";
         
-        w.GetAuraOfTheSword();
-        w.GetBerserk();
-        w.GetDash();
-        w.GetSwordSpin();
-        w.GetThreeWayCut();
+        warrior.GetAuraOfTheSword();
+        warrior.GetBerserk();
+        warrior.GetDash();
+        warrior.GetSwordSpin();
+        warrior.GetThreeWayCut();
     }
 }
 
@@ -427,15 +431,14 @@ void PlayerCharacter::GetWarriorMentalSkills() const noexcept
         std::cout << "Warrior Mental Skills:\n";
         std::cout << "------------------------\n";
 
-        w.GetStrongBody();
-        w.GetSpiritStrike();
-        w.GetBash();
-        w.GetStump();
-        w.GetSwordStrike();
+        warrior.GetStrongBody();
+        warrior.GetSpiritStrike();
+        warrior.GetBash();
+        warrior.GetStump();
+        warrior.GetSwordStrike();
 
     }
 }
-
 
 void PlayerCharacter::UpgradeWarriorBodyAbilities()
 {
@@ -453,31 +456,31 @@ void PlayerCharacter::UpgradeWarriorBodyAbilities()
             {
             case WARRIOR_SKILLS::AURA_OF_THE_SWORD:
             {
-                w.UpgradeAuraOfTheSword();
+                warrior.UpgradeAuraOfTheSword();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::BERSERK:
             {
-                w.UpgradeBerserk();
+                warrior.UpgradeBerserk();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::DASH:
             {
-                w.UpgradeDash();
+                warrior.UpgradeDash();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::SWORD_SPÝN:
             {
-                w.UpgradeSwordSpin();
+                warrior.UpgradeSwordSpin();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::THREE_WAY_CUT:
             {
-                w.UpgradeThreeWayCut();
+                warrior.UpgradeThreeWayCut();
                 skillScore--;
                 break;
             }
@@ -505,31 +508,31 @@ void PlayerCharacter::UpgradeWarriorMentalAbilities()
             {
             case WARRIOR_SKILLS::STRONG_BODY:
             {
-                w.UpgradeStrongBody();
+                warrior.UpgradeStrongBody();
                 skillScore--;
                 break;
             }
-            case WARRIOR_SKILLS::SPIRIT_STRIKE:
+            case WARRIOR_SKILLS::SPIRIT_STRIKE_WARRIOR:
             {
-                w.UpgradeSpiritStrike();
+                warrior.UpgradeSpiritStrike();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::BASH:
             {
-                w.UpgradeBash();
+                warrior.UpgradeBash();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::STUMP:
             {
-                w.UpgradeStump();
+                warrior.UpgradeStump();
                 skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::SWORD_STRIKE:
             {
-                w.UpgradeSwordStrike();
+                warrior.UpgradeSwordStrike();
                 skillScore--;
                 break;
             }
@@ -540,4 +543,329 @@ void PlayerCharacter::UpgradeWarriorMentalAbilities()
     }
 
 }
+
+const bool PlayerCharacter::UseAuraOfTheSword()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Aura of the Sword") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseBerserk()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Berserk") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseDash()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Dash") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseSwordSpin()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Sword Swpin") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseThreeWayCut()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Three-Way Cut") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseStrongBody()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Strong Body") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseSpiritStrikeWarrior()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Spirit Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseBash()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Bash") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseStump()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Stump") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const bool PlayerCharacter::UseSwordStrike()
+{
+    if (characterType == CHARACTER::WARRIOR)
+    {
+        for (const auto& ability : warrior.Ability) {
+            if (ability->GetSkillName() == "Sword Strike") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void PlayerCharacter::ChooseSuraSkills()
+{
+    if (level >= 5 && characterType == CHARACTER::SURA)
+    {
+
+        bool continueLoop = true;
+
+        while (continueLoop)
+        {
+            int choice = 0;
+            std::cout << "Please specify the skill you want to choose\n\
+       1)BLACK MAGIC\n\
+       2)WEAPONARY\n";
+
+            std::cin >> choice;
+
+            switch (choice)
+            {
+            case SKILLS::BLACK_MAGIC:
+            {
+                sura.SuraBlackMagicSkills();
+                GetSuraBlackMagicSkills();
+                continueLoop = false;
+                break;
+            }
+            case SKILLS::WEAPONARY:
+            {
+                sura.SuraWeaponarySkills();
+                GetSuraWeaponarySkills();
+                continueLoop = false;
+                break;
+            }
+            default:
+                std::cout << "Wrong choice\n";
+                break;
+            }
+        }
+    }
+}
+
+void PlayerCharacter::GetSuraBlackMagicSkills() const
+{
+    if (characterType == CHARACTER::SURA)
+    {
+
+
+        std::cout << "Sura Black Magic Skills:\n";
+        std::cout << "------------------------\n";
+
+        sura.GetDarkProtection();
+        sura.GetFlameSpirit();
+        sura.GetDarkOrb();
+        sura.GetDarkStrike();
+        sura.GetFlameStrike();
+        sura.GetFlameSpirit();
+    }
+}
+
+void PlayerCharacter::GetSuraWeaponarySkills() const
+{
+    if (characterType == CHARACTER::SURA)
+    {
+
+
+        std::cout << "Sura Weaponary Skills:\n";
+        std::cout << "------------------------\n";
+
+        sura.GetEnchtantedBlade();
+        sura.GetEnchantedArmour();
+        sura.GetDispel();
+        sura.GetDragonSwirl();
+        sura.GetFear();
+        sura.GetFingerStrike();
+    }
+
+}
+
+void PlayerCharacter::UpgradeSuraBlackMagicSkills()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        while (skillScore)
+        {
+            std::cout << "\nChoose which skills you want to develop\n";
+            std::cout << "1)Dark Protection\n2)Flame Spirit\n3)Dark Orb\n4)Dark Strike\n5)Flame Strike\n6)Spirit Strike\n";
+            int choice = 0;
+            std::cin >> choice;
+
+
+            switch (choice)
+            {
+            case SURA_SKILLS::DARK_PROTECTION:
+            {
+                sura.UpgradeDarkProtection();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::FLAME_SPIRIT:
+            {
+                sura.UpgradeFlameSpirit();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::DARK_ORB:
+            {
+                sura.UpgradeDarkOrb();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::DARK_STRIKE:
+            {
+                sura.UpgradeDarkStrike();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::FLAME_STRIKE:
+            {
+                sura.UpgradeFlameStrike();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::SPIRIT_STRIKE_SURA:
+            {
+                sura.UpgradeSpiritStrike();
+                skillScore--;
+                break;
+            }
+            default:
+                std::cout << "Invalid choice. Please choose a valid skill\n";
+                break;
+            }
+        }
+    }
+}
+
+void PlayerCharacter::UpgradeSuraWeaponarySkills()
+{
+    if (characterType == CHARACTER::SURA)
+    {
+        while (skillScore)
+        {
+            std::cout << "\nChoose which skills you want to develop\n";
+            std::cout << "1)Enchanted Blade\n2)Enchanted Armour\n3)Dispel\n4)Dragon Swirl\n5)Fear\n6)Finger Strike\n";
+            int choice = 0;
+            std::cin >> choice;
+
+
+            switch (choice)
+            {
+            case SURA_SKILLS::ENCHANTED_BLADE:
+            {
+                sura.UpgradeEnchtantedBlade();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::ENCHANTED_ARMOUR:
+            {
+                sura.UpgradeEnchantedArmour();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::DISPEL:
+            {
+                sura.UpgradeDispel();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::DRAGON_SWIRL:
+            {
+                sura.UpgradeDragonSwirl();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::FEAR:
+            {
+                sura.UpgradeFear();
+                skillScore--;
+                break;
+            }
+            case SURA_SKILLS::FINGER_STRIKE:
+            {
+                sura.UpgradeFingerStrike();
+                skillScore--;
+                break;
+            }
+            default:
+                std::cout << "Invalid choice. Please choose a valid skill\n";
+                break;
+            }
+        }
+    }
+}
+
+
 
