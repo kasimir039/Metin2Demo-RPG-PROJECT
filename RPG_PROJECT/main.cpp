@@ -152,64 +152,69 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
 }
 void CreateMainCharacter()
 {
-    std::cout << "Create your Character:\n\n";
-    std::cout << "(1)WARRIOR\n";
-    std::cout << "(2)SURA\n";
-    std::cout << "(3)SHAMAN\n";
-    std::cout << "(4)ASSASSIN\n";
-
-    int choice = 0;
-    std::cin >> choice;
-
-    switch (choice)
+    while (!selectedCharacter)
     {
-    case WARRIOR:
-    {
-        CreateWarriorCharacter(selectedCharacter);
-        Warrior* warrior = new Warrior(selectedCharacter);
 
-        warrior->Display();
+        std::cout << "Create your Character:\n\n";
+        std::cout << "(1)WARRIOR\n";
+        std::cout << "(2)SURA\n";
+        std::cout << "(3)SHAMAN\n";
+        std::cout << "(4)ASSASSIN\n";
 
-        delete warrior;
-        warrior = nullptr;
-        break;
-    }
-    case SURA:
-    {
-        CreateSuraCharacter(selectedCharacter);
-        Sura* sura = new Sura(selectedCharacter);
+        int choice = 0;
+        std::cin >> choice;
 
-        sura->Display();
+        switch (choice)
+        {
+        case WARRIOR:
+        {
+            CreateWarriorCharacter(selectedCharacter);
+            Warrior* warrior = new Warrior(selectedCharacter);
 
-        delete sura;
-        sura = nullptr;
-        break;
-    }
-    case SHAMAN:
-    {
-        CreateShamanCharacter(selectedCharacter);
-        Shaman* shaman = new Shaman(selectedCharacter);
+            warrior->Display();
 
-        shaman->Display();
+            delete warrior;
+            warrior = nullptr;
+            break;
+        }
+        case SURA:
+        {
+            CreateSuraCharacter(selectedCharacter);
+            Sura* sura = new Sura(selectedCharacter);
 
-        delete shaman;
-        shaman = nullptr;
-        break;
-    }
-    case ASSASSIN:
-    {
-        CreateAssassinCharacter(selectedCharacter);
-        Assassin* assassin = new Assassin(selectedCharacter);
+            sura->Display();
 
-        assassin->Display();
+            delete sura;
+            sura = nullptr;
+            break;
+        }
+        case SHAMAN:
+        {
+            CreateShamanCharacter(selectedCharacter);
+            Shaman* shaman = new Shaman(selectedCharacter);
 
-        delete assassin;
-        assassin = nullptr;
-        break;
-    }
-    default:
-        std::cout << "UNKNOWN";
-        break;
+            shaman->Display();
+
+            delete shaman;
+            shaman = nullptr;
+            break;
+        }
+        case ASSASSIN:
+        {
+            CreateAssassinCharacter(selectedCharacter);
+            Assassin* assassin = new Assassin(selectedCharacter);
+
+            assassin->Display();
+
+            delete assassin;
+            assassin = nullptr;
+            break;
+        }
+        default:
+            std::cout << "UNKNOWN\n";
+            break;
+
+        }
     }
 }
 
