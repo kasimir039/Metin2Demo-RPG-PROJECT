@@ -259,7 +259,7 @@ void PlayerCharacter::IncreaseStats()
                     break;
                 }
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue<<'\n';
-                continue;
+                break;
             }
             case INT:
             {
@@ -274,7 +274,7 @@ void PlayerCharacter::IncreaseStats()
                     break;
                 }
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
-                continue;
+                break;
             }
             case STR:
             {
@@ -289,7 +289,7 @@ void PlayerCharacter::IncreaseStats()
                     break;
                 }
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
-                continue;
+                break;
             }
             case DEX:
             {
@@ -304,11 +304,11 @@ void PlayerCharacter::IncreaseStats()
                     break;
                 }
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
-                continue;
+                break;
             }
             default:
                 std::cout << "Invalid selection, try again.\n";
-                continue;
+                break;
             }
 
             statsPoint--;

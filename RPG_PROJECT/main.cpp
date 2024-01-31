@@ -15,7 +15,7 @@ void CreateWarriorCharacter(PlayerCharacter*& character)
     std::cout << "(2)JINNO\n";
     std::cout << "(3)SHINSOO\n";
 
-    int choice;
+    int choice = 0;
     std::cin>>choice;
 
     switch (choice)
@@ -53,7 +53,7 @@ void CreateSuraCharacter(PlayerCharacter*& character)
     std::cout << "(2)JINNO\n";
     std::cout << "(3)SHINSOO\n";
 
-    int choice;
+    int choice = 0;
     std::cin >> choice;
 
     switch (choice)
@@ -89,7 +89,7 @@ void CreateShamanCharacter(PlayerCharacter*& character)
     std::cout << "(2)JINNO\n";
     std::cout << "(3)SHINSOO\n";
 
-    int choice;
+    int choice = 0;
     std::cin >> choice;
 
     switch (choice)
@@ -125,7 +125,7 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
     std::cout << "(3)SHINSOO\n";
     std::cout << "(2)JINNO\n";
 
-    int choice;
+    int choice = 0;
     std::cin >> choice;
 
     switch (choice)
@@ -158,7 +158,7 @@ void CreateMainCharacter()
     std::cout << "(3)SHAMAN\n";
     std::cout << "(4)ASSASSIN\n";
 
-    int choice;
+    int choice = 0;
     std::cin >> choice;
 
     switch (choice)
@@ -255,16 +255,13 @@ int main()
             
             */
             selectedCharacter->DisplayCharacter();
+            
             selectedCharacter->GainExperience(900);
 
-            selectedCharacter->UseAuraOfTheSword();
+            selectedCharacter->SetCheckSkills(true);
+            selectedCharacter->UseStrongBody();
 
             selectedCharacter->DisplayCharacter();
-
-            //selectedCharacter->UpgradeWarriorBodyAbilities();
-
-            selectedCharacter->DisplayCharacter();
-  
 
 
             delete sword;
