@@ -4,7 +4,6 @@
 #include "StatBlock.h"
 
 
-
 class Abilities : public CharacterAbilities
 {
 public:

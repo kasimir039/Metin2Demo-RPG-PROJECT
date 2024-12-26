@@ -3,7 +3,7 @@
 #include "Abilities.h"
 #include <memory>
 
-enum WARRIOR_SKILLS { AURA_OF_THE_SWORD = 1, BERSERK, DASH, SWORD_SPÝN, THREE_WAY_CUT, STRONG_BODY, SPIRIT_STRIKE_WARRIOR, BASH, STUMP, SWORD_STRIKE };
+enum WARRIOR_SKILLS { AURA_OF_THE_SWORD = 1, BERSERK, DASH, SWORD_SPIN, THREE_WAY_CUT, STRONG_BODY, SPIRIT_STRIKE_WARRIOR, BASH, STUMP, SWORD_STRIKE };
 enum CHOOSE_WARRIOR_SKILLS { BODY = 1, MENTAL };
 
 class Warrior final : public PlayerAbstraction,public Abilities
@@ -26,12 +26,11 @@ private:
 
     StatBlock* stats;
 
+
 public:
-    Warrior(Player* player);
+    explicit Warrior(Player* player);
 
     Warrior() = delete;
-    Warrior(const Warrior&) = delete;
-    Warrior(const Warrior&&) = delete;
 
     std::vector<std::unique_ptr<Abilities>> Ability;
 

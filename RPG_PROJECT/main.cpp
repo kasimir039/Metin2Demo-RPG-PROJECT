@@ -1,14 +1,14 @@
 #include <iostream>
 #include "pc.h"
+#include <memory>
 
-PlayerCharacter* selectedCharacter = nullptr;
+std::unique_ptr<PlayerCharacter> selectedCharacter = nullptr;
 
-void CreateWarriorCharacter(PlayerCharacter*& character)
+void CreateWarriorCharacter(std::unique_ptr<PlayerCharacter>& character)
 {
     std::string name;
     std::cout << "Character Name: ";
     std::cin >> name;
-
 
     std::cout << "Kingdom: \n";
     std::cout << "(1)CHUNJO\n";
@@ -16,33 +16,32 @@ void CreateWarriorCharacter(PlayerCharacter*& character)
     std::cout << "(3)SHINSOO\n";
 
     int choice = 0;
-    std::cin>>choice;
+    std::cin >> choice;
 
     switch (choice)
     {
-    case CHUNJO:
+    case KINGDOM::CHUNJO:
     {
-        character = new PlayerCharacter(name, CHARACTER::WARRIOR,KINGDOM::CHUNJO, 4u, 3u, 6u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::WARRIOR, KINGDOM::CHUNJO, 4u, 3u, 6u, 3u);
         break;
     }
-    case JINNO:
+    case KINGDOM::JINNO:
     {
-        character = new PlayerCharacter(name, CHARACTER::WARRIOR, KINGDOM::JINNO, 4u, 3u, 6u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::WARRIOR, KINGDOM::JINNO, 4u, 3u, 6u, 3u);
         break;
     }
-    case SHINSOO:
+    case KINGDOM::SHINSOO:
     {
-        character = new PlayerCharacter(name, CHARACTER::WARRIOR, KINGDOM::SHINSOO, 4u, 3u, 6u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::WARRIOR, KINGDOM::SHINSOO, 4u, 3u, 6u, 3u);
         break;
     }
     default:
         std::cout << "UNKNOWN";
         break;
     }
-
-
 }
-void CreateSuraCharacter(PlayerCharacter*& character)
+
+void CreateSuraCharacter(std::unique_ptr<PlayerCharacter>& character)
 {
     std::string name;
     std::cout << "Character Name: ";
@@ -60,17 +59,17 @@ void CreateSuraCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::CHUNJO, 6u, 4u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SURA, KINGDOM::CHUNJO, 6u, 4u, 3u, 3u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::JINNO, 6u, 4u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SURA, KINGDOM::JINNO, 6u, 4u, 3u, 3u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SURA, KINGDOM::SHINSOO, 6u, 4u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SURA, KINGDOM::SHINSOO, 6u, 4u, 3u, 3u);
         break;
     }
     default:
@@ -78,7 +77,8 @@ void CreateSuraCharacter(PlayerCharacter*& character)
         break;
     }
 }
-void CreateShamanCharacter(PlayerCharacter*& character)
+
+void CreateShamanCharacter(std::unique_ptr<PlayerCharacter>& character)
 {
     std::string name;
     std::cout << "Character Name: ";
@@ -96,17 +96,17 @@ void CreateShamanCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::CHUNJO, 4u, 6u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SHAMAN, KINGDOM::CHUNJO, 4u, 6u, 3u, 3u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::JINNO, 4u, 6u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SHAMAN, KINGDOM::JINNO, 4u, 6u, 3u, 3u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, CHARACTER::SHAMAN, KINGDOM::SHINSOO, 4u, 6u, 3u, 3u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::SHAMAN, KINGDOM::SHINSOO, 4u, 6u, 3u, 3u);
         break;
     }
     default:
@@ -114,7 +114,8 @@ void CreateShamanCharacter(PlayerCharacter*& character)
         break;
     }
 }
-void CreateAssassinCharacter(PlayerCharacter*& character)
+
+void CreateAssassinCharacter(std::unique_ptr<PlayerCharacter>& character)
 {
     std::string name;
     std::cout << "Character Name: ";
@@ -122,8 +123,8 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
 
     std::cout << "Kingdom: \n";
     std::cout << "(1)CHUNJO\n";
-    std::cout << "(3)SHINSOO\n";
     std::cout << "(2)JINNO\n";
+    std::cout << "(3)SHINSOO\n";
 
     int choice = 0;
     std::cin >> choice;
@@ -132,17 +133,17 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
     {
     case CHUNJO:
     {
-        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::CHUNJO, 3u, 3u, 4u, 6u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::ASSASSIN, KINGDOM::CHUNJO, 3u, 3u, 4u, 6u);
         break;
     }
     case JINNO:
     {
-        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::JINNO, 3u, 3u, 4u, 6u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::ASSASSIN, KINGDOM::JINNO, 3u, 3u, 4u, 6u);
         break;
     }
     case SHINSOO:
     {
-        character = new PlayerCharacter(name, CHARACTER::ASSASSIN, KINGDOM::SHINSOO, 3u, 3u, 4u, 6u);
+        character = std::make_unique<PlayerCharacter>(name, CHARACTER::ASSASSIN, KINGDOM::SHINSOO, 3u, 3u, 4u, 6u);
         break;
     }
     default:
@@ -150,11 +151,11 @@ void CreateAssassinCharacter(PlayerCharacter*& character)
         break;
     }
 }
+
 void CreateMainCharacter()
 {
     while (!selectedCharacter)
     {
-
         std::cout << "Create your Character:\n\n";
         std::cout << "(1)WARRIOR\n";
         std::cout << "(2)SURA\n";
@@ -169,51 +170,38 @@ void CreateMainCharacter()
         case WARRIOR:
         {
             CreateWarriorCharacter(selectedCharacter);
-            Warrior* warrior = new Warrior(selectedCharacter);
+            Warrior warrior(selectedCharacter.get());
 
-            warrior->Display();
-
-            delete warrior;
-            warrior = nullptr;
+            warrior.Display();
             break;
         }
         case SURA:
         {
             CreateSuraCharacter(selectedCharacter);
-            Sura* sura = new Sura(selectedCharacter);
+            Sura sura(selectedCharacter.get());
 
-            sura->Display();
-
-            delete sura;
-            sura = nullptr;
+            sura.Display();
             break;
         }
         case SHAMAN:
         {
             CreateShamanCharacter(selectedCharacter);
-            Shaman* shaman = new Shaman(selectedCharacter);
+            Shaman shaman(selectedCharacter.get());
 
-            shaman->Display();
-
-            delete shaman;
-            shaman = nullptr;
+            shaman.Display();
             break;
         }
-        case ASSASSIN:
+        case CHARACTER::ASSASSIN:
         {
             CreateAssassinCharacter(selectedCharacter);
-            Assassin* assassin = new Assassin(selectedCharacter);
+            Assassin assassin(selectedCharacter.get());
 
-            assassin->Display();
-
-            delete assassin;
-            assassin = nullptr;
+            assassin.Display();
             break;
         }
         default:
             std::cout << "UNKNOWN\n";
             break;
-
         }
     }
 }
@@ -226,25 +214,20 @@ int main()
     {
         if (selectedCharacter)
         {
+            auto sword = std::make_unique<Weapon>("Sword", 50);
+            auto armor = std::make_unique<Armor>("Iron Plate", 25, 60);
 
-            Weapon* sword = new Weapon("Sword", 50);
-            Armor* armor = new Armor("Iron Plate", 25, 60);
-                
             if (sword)
             {
-                //selectedCharacter->EquipWeapon(sword);
+                //selectedCharacter->EquipWeapon(sword.get());
                 //selectedCharacter->DisplayWeapons();
             }
             if (armor)
             {
-
-                //selectedCharacter->EquipArmor(armor);
+                //selectedCharacter->EquipArmor(armor.get());
                 //selectedCharacter->DisplayArmor();
-
             }
 
-          
-           
             /*
             selectedCharacter->TakeDamage(5);
 
@@ -255,31 +238,19 @@ int main()
             selectedCharacter->DisplayCharacter();
 
             selectedCharacter->IncreaseHealth(3);
-           
+
             selectedCharacter->DisplayCharacter();
-            
             */
             selectedCharacter->DisplayCharacter();
-            
+
             selectedCharacter->GainExperience(900);
 
             selectedCharacter->SetCheckSkills(true);
             selectedCharacter->UseStrongBody();
 
             selectedCharacter->DisplayCharacter();
-
-
-            delete sword;
-            sword = nullptr;
-
-            delete armor;
-            armor = nullptr;
-
-            delete selectedCharacter;
-            selectedCharacter = nullptr;
-            
         }
     }
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

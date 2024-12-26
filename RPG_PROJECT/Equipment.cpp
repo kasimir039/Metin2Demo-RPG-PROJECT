@@ -1,11 +1,11 @@
 #include "Equipment.h"
 
-Equipment::Equipment(std::string name) 
+Equipment::Equipment(const std::string& name) 
 	: eqName(name)
 {
 }
 
-const std::string Equipment::GetEquipmentName() const noexcept { return eqName; }
+  std::string Equipment::GetEquipmentName() const noexcept { return eqName; }
 
 
 

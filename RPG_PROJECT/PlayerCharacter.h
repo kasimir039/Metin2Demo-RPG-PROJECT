@@ -5,14 +5,15 @@
 #include "Armor.h"
 #include "Warrior.h"
 #include "Sura.h"
+#include <memory>
 #include <vector>
 
-enum CHARACTER { WARRIOR = 1, SURA, SHAMAN, ASSASSIN };
-enum KINGDOM { CHUNJO = 1, JINNO, SHINSOO };
-enum STATS { VIT = 1, INT, STR, DEX };
+enum  CHARACTER { WARRIOR = 1, SURA, SHAMAN, ASSASSIN };
+enum  KINGDOM  { CHUNJO = 1, JINNO, SHINSOO };
+enum   STATS  { VIT = 1, INT, STR, DEX };
 
 
-class PlayerCharacter : public Player
+class PlayerCharacter final : public Player
 {
 private:
 	bool CheckLevel();
@@ -43,24 +44,21 @@ private:
 
 public:
 
-	PlayerCharacter(const std::string& name,CHARACTER character,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
-	
+	PlayerCharacter(std::string_view name,CHARACTER character,KINGDOM kingdom,statusType VIT, statusType INT, statusType STR, statusType DEX);
 
-	PlayerCharacter(const PlayerCharacter&) = delete;
-	PlayerCharacter(const PlayerCharacter&&) = delete;
 
-	~PlayerCharacter();
+	~PlayerCharacter() override;
 
 	//Getters
-	const std::string GetCharacterName() const noexcept;
-	const std::string GetKingdom() const noexcept;
-	const expType GetExp() const noexcept;
-	const expType GetRequiredExp() const noexcept;
-	const levelType GetLevel() const noexcept;
-	const statusType GetStatsPoint() const noexcept;
+	 std::string GetCharacterName() const noexcept;
+	 std::string GetKingdom() const noexcept;
+	 expType GetExp() const noexcept;
+	 expType GetRequiredExp() const noexcept;
+	 levelType GetLevel() const noexcept;
+	 statusType GetStatsPoint() const noexcept;
 	
 	//Functions
-	const void DisplayCharacter() noexcept override;
+	void DisplayCharacter() noexcept override;
 	void GainExperience(expType exp);
 	void EquipWeapon(Weapon* weapon);
 	void EquipArmor(Armor* armor);
@@ -69,12 +67,12 @@ public:
 	void ChooseSkills();
 	void SetCheckSkills(bool value);
 
-	const void DisplayWeapons() const;
-	const void DisplayArmor() const;
-	const equipmentType MaxWeaponAttack();
-	const equipmentType MinWeaponAttack();
-	const equipmentType MaxArmorHealthPoint();
-	const equipmentType MaxArmorDefense();
+	 void DisplayWeapons() const;
+	 void DisplayArmor() const;
+	 equipmentType MaxWeaponAttack();
+	 equipmentType MinWeaponAttack();
+	 equipmentType MaxArmorHealthPoint();
+	 equipmentType MaxArmorDefense();
 
 	//Warrior
 	void UpgradeWarriorBodyAbilities();
@@ -83,17 +81,17 @@ public:
 	void GetWarriorBodySkills() const noexcept;
 	void GetWarriorMentalSkills() const noexcept;
 
-	const bool UseAuraOfTheSword();
-	const bool UseBerserk();
-	const bool UseDash();
-	const bool UseSwordSpin();
-	const bool UseThreeWayCut();
+	 bool UseAuraOfTheSword()const;
+	 bool UseBerserk()const;
+	 bool UseDash()const;
+	 bool UseSwordSpin()const;
+	 bool UseThreeWayCut()const;
 
-	const bool UseStrongBody();
-	const bool UseSpiritStrikeWarrior();
-	const bool UseBash();
-	const bool UseStump();
-	const bool UseSwordStrike();
+	 bool UseStrongBody()const;
+	 bool UseSpiritStrikeWarrior()const;
+	 bool UseBash()const;
+	 bool UseStump()const;
+	 bool UseSwordStrike()const;
 
 	//Sura
 	void UpgradeSuraBlackMagicSkills();
@@ -102,19 +100,22 @@ public:
 	void GetSuraBlackMagicSkills() const;
 	void GetSuraWeaponarySkills() const;
 
-	const bool UseDarkOrb();
-	const bool UseDarkProtection();
-	const bool UseDarkStrike();
-	const bool UseFlameSpirit();
-	const bool UseFlameStrike();
-	const bool UseSpiritStrikeSura();
+	 bool UseDarkOrb()const;
+	 bool UseDarkProtection() const;
+	 bool UseDarkStrike()const;
+	 bool UseFlameSpirit()const;
+	 bool UseFlameStrike()const;
+	 bool UseSpiritStrikeSura()const;
 
-	const bool UseDispel();
-	const bool UseDragonSwirl();
-	const bool UseEnchantedArmour();
-	const bool UseEnchantedBlade();
-	const bool UseFear();
-	const bool UseFingerStrike();
+	 bool UseDispel()const;
+	 bool UseDragonSwirl()const;
+	 bool UseEnchantedArmour()const;
+	 bool UseEnchantedBlade()const;
+	 bool UseFear()const;
+	 bool UseFingerStrike()const;
+
+	PlayerCharacter() = default;
+
 };
 
 

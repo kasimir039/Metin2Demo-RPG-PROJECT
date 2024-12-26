@@ -1,20 +1,27 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter(const std::string& name,CHARACTER character,KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
-    : characterType(character),kingdom(kingdom), experience(0u), level(1u), requiredExperience(50u), statsPoint(0u),warrior(NULL),skillScore(0),sura(NULL),checkSkill(false)
+PlayerCharacter::PlayerCharacter(std::string_view name, CHARACTER character, KINGDOM kingdom, statusType VIT, statusType INT, statusType STR, statusType DEX)
+    : stats(std::make_unique<StatBlock>(VIT, INT, STR, DEX).release()),
+    warrior(nullptr),
+    sura(nullptr),
+    kingdom(kingdom),
+    characterType(character),
+    experience(0u),
+    requiredExperience(50u),
+    level(1u),
+    statsPoint(0u),
+    skillScore(0),
+    checkSkill(false)
 {
     characterName = name.substr(0, maxNameLength);
-    stats = new StatBlock(VIT, INT, STR, DEX);  
-
 }
 
-PlayerCharacter::~PlayerCharacter() {
-    delete stats;
-}
+PlayerCharacter::~PlayerCharacter() = default;
 
-const std::string PlayerCharacter::GetCharacterName() const noexcept { return characterName; }
 
-const std::string PlayerCharacter::GetKingdom() const noexcept
+ std::string PlayerCharacter::GetCharacterName() const noexcept { return characterName; }
+
+ std::string PlayerCharacter::GetKingdom() const noexcept
 {
 
     if (kingdom == KINGDOM::CHUNJO)
@@ -33,30 +40,30 @@ const std::string PlayerCharacter::GetKingdom() const noexcept
     return "UNKNOWN";
 }
 
-const expType PlayerCharacter::GetExp() const noexcept { return experience; }
-const expType PlayerCharacter::GetRequiredExp() const noexcept { return requiredExperience; }
-const levelType PlayerCharacter::GetLevel() const noexcept { return level; }
-const levelType PlayerCharacter::GetStatsPoint() const noexcept{ return statsPoint; }
+ expType PlayerCharacter::GetExp() const noexcept { return experience; }
+ expType PlayerCharacter::GetRequiredExp() const noexcept { return requiredExperience; }
+ levelType PlayerCharacter::GetLevel() const noexcept { return level; }
+ levelType PlayerCharacter::GetStatsPoint() const noexcept { return statsPoint; }
 
-const void PlayerCharacter::DisplayWeapons() const
+ void PlayerCharacter::DisplayWeapons() const
 {
     std::cout << "Equipped Weapons:\n";
     for (const auto& weapon : weapons) {
-        std::cout << weapon->GetEquipmentName() << " (Attack Power: " << weapon->GetWeaponPower() << ")\n";
+        std::cout << weapon->GetEquipmentName() << " (Attack Power: " << Weapon::GetWeaponPower() << ")\n";
     }
 
 }
 
-const void PlayerCharacter::DisplayArmor() const
+ void PlayerCharacter::DisplayArmor() const
 {
     std::cout << "Equipped Armor:\n";
     for (const auto& armor : armors) {
-        std::cout << armor->GetEquipmentName() << " (Health Power: " << armor->GetArmorHp() << ")" << "(Defense : " << armor->GetArmorDef() << ")\n";
+        std::cout << armor->GetEquipmentName() << " (Health Power: " << Armor::GetArmorHp() << ")" << "(Defense : " << Armor::GetArmorDef() << ")\n";
     }
-   
+
 }
 
-const equipmentType PlayerCharacter::MaxWeaponAttack() 
+ equipmentType PlayerCharacter::MaxWeaponAttack()
 {
     auto totalAttackPower = 0;
 
@@ -65,7 +72,7 @@ const equipmentType PlayerCharacter::MaxWeaponAttack()
         totalAttackPower = Weapon::GetWeaponPower() + stats->GetStrengthPoint();
     }
 
-    if (UseAuraOfTheSword() && !weapons.empty() && checkSkill)   {
+    if (UseAuraOfTheSword() && !weapons.empty() && checkSkill) {
         for (const auto& ability : warrior.Ability) {
             if (ability->GetSkillName() == "Aura of the Sword") {
                 totalAttackPower += ability->GetAttackPower();
@@ -87,14 +94,14 @@ const equipmentType PlayerCharacter::MaxWeaponAttack()
     return totalAttackPower;
 }
 
-const equipmentType PlayerCharacter::MinWeaponAttack() 
+equipmentType PlayerCharacter::MinWeaponAttack()
 {
 
     if (!weapons.empty())
     {
         for (const auto& weapon : weapons)
         {
-            auto value = weapon->GetWeaponPower() + stats->GetStrengthPoint();
+            auto value = Weapon::GetWeaponPower() + stats->GetStrengthPoint();
             return value;
         }
 
@@ -105,7 +112,7 @@ const equipmentType PlayerCharacter::MinWeaponAttack()
     return strengthVal;
 }
 
-const equipmentType PlayerCharacter::MaxArmorHealthPoint()
+ equipmentType PlayerCharacter::MaxArmorHealthPoint()
 {
     if (!armors.empty())
     {
@@ -119,7 +126,7 @@ const equipmentType PlayerCharacter::MaxArmorHealthPoint()
 }
 
 
-const equipmentType PlayerCharacter::MaxArmorDefense()
+ equipmentType PlayerCharacter::MaxArmorDefense()
 {
 
     auto totalDefence = 0;
@@ -129,7 +136,7 @@ const equipmentType PlayerCharacter::MaxArmorDefense()
         totalDefence = Armor::GetArmorDef() + stats->GetDexPoint();
 
     }
-    else if(armors.empty())
+    else if (armors.empty())
     {
         totalDefence = stats->GetDexPoint();
 
@@ -178,10 +185,10 @@ void PlayerCharacter::GainExperience(expType expAmount)
     }
 }
 
-void PlayerCharacter::EquipWeapon(Weapon* weapon)
+void PlayerCharacter::EquipWeapon(Weapon* newWeapon)
 {
-        
-    weapons.push_back(weapon);
+
+    weapons.push_back(newWeapon);
 
     if (!weapons.empty())
     {
@@ -190,35 +197,32 @@ void PlayerCharacter::EquipWeapon(Weapon* weapon)
 
         for (const auto& weapon : weapons)
         {
-            value += weapon->GetWeaponPower();
+            value += Weapon::GetWeaponPower();
         }
 
         std::cout << "Updated Attack Power with Weapon Power: " << value << '\n';
     }
-    
+
 }
 
-void PlayerCharacter::EquipArmor(Armor* armor)
+void PlayerCharacter::EquipArmor(Armor* newArmor)
 {
-
-    armors.push_back(armor);
+    armors.push_back(newArmor);
 
     if (!armors.empty())
     {
         auto hpValue = stats->GetHealthPoint();
         auto defValue = stats->GetDexPoint();
 
-        for (const auto& armor : armors)
+        for (const auto& armorItem : armors)
         {
-            hpValue += armor->GetArmorHp();
-            defValue += armor->GetArmorDef();
+            hpValue += Armor::GetArmorHp();
+            defValue += Armor::GetArmorDef();
         }
 
         std::cout << "Updated Armor with Armor HP-DEF: " << "HP: " << hpValue
-
             << "DEF: " << defValue << '\n';
     }
-
 }
 
 void PlayerCharacter::IncreaseStats()
@@ -246,7 +250,7 @@ void PlayerCharacter::IncreaseStats()
 
             switch (choice)
             {
-            case VIT:
+            case STATS::VIT:
             {
                 currentValue = stats->GetVit();
                 maxValue = stats->GetMaxVit();
@@ -258,13 +262,13 @@ void PlayerCharacter::IncreaseStats()
                     stats->CalculateHealthPoint();
                     break;
                 }
-                std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue<<'\n';
+                std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
                 break;
             }
-            case INT:
+            case STATS::INT:
             {
-               currentValue = stats->GetInt();
-               maxValue = stats->GetMaxInt();
+                currentValue = stats->GetInt();
+                maxValue = stats->GetMaxInt();
 
                 if (currentValue < maxValue)
                 {
@@ -276,10 +280,10 @@ void PlayerCharacter::IncreaseStats()
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
                 break;
             }
-            case STR:
+            case STATS::STR:
             {
-               currentValue = stats->GetStr();
-               maxValue = stats->GetMaxStr();
+                currentValue = stats->GetStr();
+                maxValue = stats->GetMaxStr();
 
                 if (currentValue < maxValue)
                 {
@@ -291,10 +295,10 @@ void PlayerCharacter::IncreaseStats()
                 std::cout << "\nPlease make another choice, status limit exceeded. " << maxValue << '\n';
                 break;
             }
-            case DEX:
+            case STATS::DEX:
             {
-               currentValue = stats->GetDex();
-               maxValue = stats->GetMaxDex();
+                currentValue = stats->GetDex();
+                maxValue = stats->GetMaxDex();
 
                 if (currentValue < maxValue)
                 {
@@ -332,7 +336,6 @@ bool PlayerCharacter::CheckLevel()
         experience = excessExp;
         IncreaseStats();
 
-
         ChooseSkills();
 
         return true;
@@ -343,13 +346,13 @@ bool PlayerCharacter::CheckLevel()
 }
 
 
-const void PlayerCharacter::DisplayCharacter() noexcept
+void PlayerCharacter::DisplayCharacter() noexcept
 {
 
-    std::cout << '\n'<<"Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
+    std::cout << '\n' << "Character Name: " << GetCharacterName() << " | " << "Kingdom: " << GetKingdom() << '\n'
         << "Level: " << GetLevel() << " |" << " Exp: " << GetExp() << " | " << "Required exp: " << GetRequiredExp() << '\n'
         << "Status Point: " << GetStatsPoint() << '\n'
-        << "VIT: " << stats->GetVit() << " |" << " HP:" << MaxArmorHealthPoint() <<  '\n'
+        << "VIT: " << stats->GetVit() << " |" << " HP:" << MaxArmorHealthPoint() << '\n'
         << "INT: " << stats->GetInt() << " |" << " SP:" << stats->GetIntelligencePoint() << '\n'
         << "STR: " << stats->GetStr() << " |" << " Attack Power:" << MinWeaponAttack() << " - " << MaxWeaponAttack() << '\n'
         << "DEX: " << stats->GetDex() << " |" << " Defense:" << MaxArmorDefense() << '\n' << '\n';
@@ -372,8 +375,8 @@ void PlayerCharacter::TakeDamage(statusType damage)
 
 void PlayerCharacter::IncreaseHealth(statusType value)
 {
-    
-    auto hp = stats->GetHealthPoint();
+
+    const auto hp = stats->GetHealthPoint();
     const auto maxHp = stats->GetMaxHealthPoint();
 
     if (hp + value > maxHp)
@@ -384,9 +387,9 @@ void PlayerCharacter::IncreaseHealth(statusType value)
     else
     {
         stats->SetHealthPoint(hp + value);
-        std::cout << "Increased Amount of Health: " << value<<'\n';
+        std::cout << "Increased Amount of Health: " << value << '\n';
     }
-    
+
 }
 
 void PlayerCharacter::ChooseSkills()
@@ -405,17 +408,17 @@ void PlayerCharacter::SetCheckSkills(bool value)
 void PlayerCharacter::ChooseWarriorSkills()
 {
 
-    if (level >= 5 && characterType == CHARACTER::WARRIOR)
+    if (level == 5 && characterType == CHARACTER::WARRIOR)
     {
+		bool validChoice = true;
 
-        bool continueLoop = true;
-
-        while (continueLoop)
+        while (validChoice)
         {
             int choice = 0;
-            std::cout << "Please specify the skill you want to choose\n\
-       1)BODY\n\
-       2)MENTAL\n";
+
+            std::cout << "Please specify the skill you want to choose\r\n"
+                        "1)BODY\r\n"
+                        "2)MENTAL\r\n";
 
             std::cin >> choice;
 
@@ -425,14 +428,14 @@ void PlayerCharacter::ChooseWarriorSkills()
             {
                 warrior.BodyWarriorSkills();
                 GetWarriorBodySkills();
-                continueLoop = false;
+                validChoice = false;
                 break;
             }
             case CHOOSE_WARRIOR_SKILLS::MENTAL:
             {
                 warrior.MentalWarriorSkills();
                 GetWarriorMentalSkills();
-                continueLoop = false;
+                validChoice = false;
                 break;
             }
             default:
@@ -451,7 +454,7 @@ void PlayerCharacter::GetWarriorBodySkills() const noexcept
 
         std::cout << "Warrior Body Skills:\n";
         std::cout << "------------------------\n";
-        
+
         warrior.GetAuraOfTheSword();
         warrior.GetBerserk();
         warrior.GetDash();
@@ -478,52 +481,54 @@ void PlayerCharacter::GetWarriorMentalSkills() const noexcept
 
 void PlayerCharacter::UpgradeWarriorBodyAbilities()
 {
-    if (characterType == CHARACTER::WARRIOR)
+    if (characterType != CHARACTER::WARRIOR) {
+        return;
+    }
+
+    while (skillScore)
     {
-        while (skillScore)
-        {
         std::cout << "\nChoose which skills you want to develop\n";
         std::cout << "1)Aura of The Sword\n2)Berserk\n3)Dash\n4)Sword Spin\n5)Three-Way-Cut\n";
+
         int choice = 0;
         std::cin >> choice;
 
+        bool validChoice = true;
 
-            switch (choice)
-            {
-            case WARRIOR_SKILLS::AURA_OF_THE_SWORD:
-            {
-                warrior.UpgradeAuraOfTheSword();
-                skillScore--;
-                break;
-            }
-            case WARRIOR_SKILLS::BERSERK:
-            {
-                warrior.UpgradeBerserk();
-                skillScore--;
-                break;
-            }
-            case WARRIOR_SKILLS::DASH:
-            {
-                warrior.UpgradeDash();
-                skillScore--;
-                break;
-            }
-            case WARRIOR_SKILLS::SWORD_SPÝN:
-            {
-                warrior.UpgradeSwordSpin();
-                skillScore--;
-                break;
-            }
-            case WARRIOR_SKILLS::THREE_WAY_CUT:
-            {
-                warrior.UpgradeThreeWayCut();
-                skillScore--;
-                break;
-            }
-            default:
-                std::cout << "Invalid choice. Please choose a valid skill\n";
-                break;
-            }
+        switch (choice)
+        {
+        case WARRIOR_SKILLS::AURA_OF_THE_SWORD:
+        {
+            warrior.UpgradeAuraOfTheSword();
+            break;
+        }
+        case WARRIOR_SKILLS::BERSERK:
+        {
+            warrior.UpgradeBerserk();
+            break;
+        }
+        case WARRIOR_SKILLS::DASH:
+        {
+            warrior.UpgradeDash();
+            break;
+        }
+        case WARRIOR_SKILLS::SWORD_SPIN:
+        {
+            warrior.UpgradeSwordSpin();
+            break;
+        }
+        case WARRIOR_SKILLS::THREE_WAY_CUT:
+        {
+            warrior.UpgradeThreeWayCut();
+            break;
+        }
+        default:
+            std::cout << "Invalid choice. Please choose a valid skill\n";
+            validChoice = false;
+            break;
+        }
+        if (validChoice) {
+            skillScore--;
         }
     }
 
@@ -531,56 +536,63 @@ void PlayerCharacter::UpgradeWarriorBodyAbilities()
 
 void PlayerCharacter::UpgradeWarriorMentalAbilities()
 {
-    if (characterType == CHARACTER::WARRIOR)
-    {
+    if (characterType != CHARACTER::WARRIOR) {
+        return;
+    }
+
         while (skillScore)
         {
-        std::cout << "\nChoose which skills you want to develop\n";
-        std::cout << "1)Strong Body\n2)Spirit Strike\n3)Bash\n4)tump\n5)Sword Strike\n";
-        int choice = 0;
-        std::cin >> choice;
+            std::cout << "\nChoose which skills you want to develop\n";
+            std::cout << "1)Strong Body\n2)Spirit Strike\n3)Bash\n4)tump\n5)Sword Strike\n";
+           
+            int choice = 0;
+            std::cin >> choice;
+
+            bool validChoice = true;
 
             switch (choice)
             {
             case WARRIOR_SKILLS::STRONG_BODY:
             {
                 warrior.UpgradeStrongBody();
-                skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::SPIRIT_STRIKE_WARRIOR:
             {
                 warrior.UpgradeSpiritStrike();
-                skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::BASH:
             {
                 warrior.UpgradeBash();
-                skillScore--;
                 break;
             }
             case WARRIOR_SKILLS::STUMP:
             {
                 warrior.UpgradeStump();
-                skillScore--;
+ 
                 break;
             }
             case WARRIOR_SKILLS::SWORD_STRIKE:
             {
                 warrior.UpgradeSwordStrike();
-                skillScore--;
+
                 break;
             }
             default:
+                std::cout << "Invalid choice. Please choose a valid skill\n";
+				validChoice = false;
                 break;
             }
+			if (validChoice)
+			{
+				skillScore--;
+			}
         }
-    }
 
 }
 
-const bool PlayerCharacter::UseAuraOfTheSword()
+bool PlayerCharacter::UseAuraOfTheSword() const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -593,7 +605,7 @@ const bool PlayerCharacter::UseAuraOfTheSword()
     return false;
 }
 
-const bool PlayerCharacter::UseBerserk()
+bool PlayerCharacter::UseBerserk() const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -606,7 +618,7 @@ const bool PlayerCharacter::UseBerserk()
     return false;
 }
 
-const bool PlayerCharacter::UseDash()
+bool PlayerCharacter::UseDash()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -619,7 +631,7 @@ const bool PlayerCharacter::UseDash()
     return false;
 }
 
-const bool PlayerCharacter::UseSwordSpin()
+bool PlayerCharacter::UseSwordSpin()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -632,7 +644,7 @@ const bool PlayerCharacter::UseSwordSpin()
     return false;
 }
 
-const bool PlayerCharacter::UseThreeWayCut()
+bool PlayerCharacter::UseThreeWayCut()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -645,7 +657,7 @@ const bool PlayerCharacter::UseThreeWayCut()
     return false;
 }
 
-const bool PlayerCharacter::UseStrongBody()
+bool PlayerCharacter::UseStrongBody()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -658,7 +670,7 @@ const bool PlayerCharacter::UseStrongBody()
     return false;
 }
 
-const bool PlayerCharacter::UseSpiritStrikeWarrior()
+bool PlayerCharacter::UseSpiritStrikeWarrior()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -671,7 +683,7 @@ const bool PlayerCharacter::UseSpiritStrikeWarrior()
     return false;
 }
 
-const bool PlayerCharacter::UseBash()
+bool PlayerCharacter::UseBash()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -684,7 +696,7 @@ const bool PlayerCharacter::UseBash()
     return false;
 }
 
-const bool PlayerCharacter::UseStump()
+bool PlayerCharacter::UseStump()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -697,7 +709,7 @@ const bool PlayerCharacter::UseStump()
     return false;
 }
 
-const bool PlayerCharacter::UseSwordStrike()
+bool PlayerCharacter::UseSwordStrike()const
 {
     if (characterType == CHARACTER::WARRIOR)
     {
@@ -712,17 +724,18 @@ const bool PlayerCharacter::UseSwordStrike()
 
 void PlayerCharacter::ChooseSuraSkills()
 {
-    if (level >= 5 && characterType == CHARACTER::SURA)
+    if (level == 5 && characterType == CHARACTER::SURA)
     {
 
-        bool continueLoop = true;
+        bool validChoice = true;
 
-        while (continueLoop)
+        while (validChoice)
         {
             int choice = 0;
-            std::cout << "Please specify the skill you want to choose\n\
-       1)BLACK MAGIC\n\
-       2)WEAPONARY\n";
+
+            std::cout << "Please specify the skill you want to choose\r\n"
+                        "1)BLACK MAGIC\r\n"
+                        "2)WEAPONARY\r\n";
 
             std::cin >> choice;
 
@@ -732,14 +745,14 @@ void PlayerCharacter::ChooseSuraSkills()
             {
                 sura.SuraBlackMagicSkills();
                 GetSuraBlackMagicSkills();
-                continueLoop = false;
+                validChoice = false;
                 break;
             }
             case CHOOSE_SURA_SKILLS::WEAPONARY:
             {
                 sura.SuraWeaponarySkills();
                 GetSuraWeaponarySkills();
-                continueLoop = false;
+                validChoice = false;
                 break;
             }
             default:
@@ -789,8 +802,11 @@ void PlayerCharacter::GetSuraWeaponarySkills() const
 
 void PlayerCharacter::UpgradeSuraBlackMagicSkills()
 {
-    if (characterType == CHARACTER::SURA)
+    if (characterType != CHARACTER::SURA)
     {
+        return;
+    }
+    
         while (skillScore)
         {
             std::cout << "\nChoose which skills you want to develop\n";
@@ -798,6 +814,7 @@ void PlayerCharacter::UpgradeSuraBlackMagicSkills()
             int choice = 0;
             std::cin >> choice;
 
+			bool validChoice = true;
 
             switch (choice)
             {
@@ -839,75 +856,83 @@ void PlayerCharacter::UpgradeSuraBlackMagicSkills()
             }
             default:
                 std::cout << "Invalid choice. Please choose a valid skill\n";
+				validChoice = false;
                 break;
             }
+
+            if (validChoice)
+            {
+                skillScore--;
+            }
         }
-    }
 }
 
 void PlayerCharacter::UpgradeSuraWeaponarySkills()
 {
-    if (characterType == CHARACTER::SURA)
+    if (characterType != CHARACTER::SURA)
     {
+        return;
+    }
+
         while (skillScore)
         {
             std::cout << "\nChoose which skills you want to develop\n";
             std::cout << "1)Enchanted Blade\n2)Enchanted Armour\n3)Dispel\n4)Dragon Swirl\n5)Fear\n6)Finger Strike\n";
+           
             int choice = 0;
             std::cin >> choice;
 
+			bool validChoice = true;
 
             switch (choice)
             {
             case SURA_SKILLS::ENCHANTED_BLADE:
             {
                 sura.UpgradeEnchtantedBlade();
-                skillScore--;
                 break;
             }
             case SURA_SKILLS::ENCHANTED_ARMOUR:
             {
                 sura.UpgradeEnchantedArmour();
-                skillScore--;
                 break;
             }
             case SURA_SKILLS::DISPEL:
             {
                 sura.UpgradeDispel();
-                skillScore--;
                 break;
             }
             case SURA_SKILLS::DRAGON_SWIRL:
             {
                 sura.UpgradeDragonSwirl();
-                skillScore--;
                 break;
             }
             case SURA_SKILLS::FEAR:
             {
                 sura.UpgradeFear();
-                skillScore--;
                 break;
             }
             case SURA_SKILLS::FINGER_STRIKE:
             {
                 sura.UpgradeFingerStrike();
-                skillScore--;
                 break;
             }
             default:
                 std::cout << "Invalid choice. Please choose a valid skill\n";
+				validChoice = false;
                 break;
             }
+			if (validChoice)
+			{
+				skillScore--;
+			}
         }
-    }
 }
 
-const bool PlayerCharacter::UseDarkOrb()
+bool PlayerCharacter::UseDarkOrb()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Dark Orb") {
                 return true;
             }
@@ -916,11 +941,11 @@ const bool PlayerCharacter::UseDarkOrb()
     return false;
 }
 
-const bool PlayerCharacter::UseDarkProtection()
+bool PlayerCharacter::UseDarkProtection()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Dark Protection") {
                 return true;
             }
@@ -929,11 +954,11 @@ const bool PlayerCharacter::UseDarkProtection()
     return false;
 }
 
-const bool PlayerCharacter::UseDarkStrike()
+bool PlayerCharacter::UseDarkStrike()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Dark Strike") {
                 return true;
             }
@@ -942,11 +967,11 @@ const bool PlayerCharacter::UseDarkStrike()
     return false;
 }
 
-const bool PlayerCharacter::UseFlameSpirit()
+bool PlayerCharacter::UseFlameSpirit()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Flame Spirit") {
                 return true;
             }
@@ -955,11 +980,11 @@ const bool PlayerCharacter::UseFlameSpirit()
     return false;
 }
 
-const bool PlayerCharacter::UseFlameStrike()
+bool PlayerCharacter::UseFlameStrike()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Flame Strike") {
                 return true;
             }
@@ -968,11 +993,11 @@ const bool PlayerCharacter::UseFlameStrike()
     return false;
 }
 
-const bool PlayerCharacter::UseSpiritStrikeSura()
+bool PlayerCharacter::UseSpiritStrikeSura()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Spirit Strike") {
                 return true;
             }
@@ -981,11 +1006,11 @@ const bool PlayerCharacter::UseSpiritStrikeSura()
     return false;
 }
 
-const bool PlayerCharacter::UseDispel()
+bool PlayerCharacter::UseDispel()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Dispel") {
                 return true;
             }
@@ -994,11 +1019,11 @@ const bool PlayerCharacter::UseDispel()
     return false;
 }
 
-const bool PlayerCharacter::UseDragonSwirl()
+bool PlayerCharacter::UseDragonSwirl()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Dragon Swirl") {
                 return true;
             }
@@ -1007,11 +1032,11 @@ const bool PlayerCharacter::UseDragonSwirl()
     return false;
 }
 
-const bool PlayerCharacter::UseEnchantedArmour()
+bool PlayerCharacter::UseEnchantedArmour()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Enchanted Armour") {
                 return true;
             }
@@ -1020,11 +1045,11 @@ const bool PlayerCharacter::UseEnchantedArmour()
     return false;
 }
 
-const bool PlayerCharacter::UseEnchantedBlade()
+bool PlayerCharacter::UseEnchantedBlade()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Enchanted Blade") {
                 return true;
             }
@@ -1033,11 +1058,11 @@ const bool PlayerCharacter::UseEnchantedBlade()
     return false;
 }
 
-const bool PlayerCharacter::UseFear()
+bool PlayerCharacter::UseFear()const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Fear") {
                 return true;
             }
@@ -1046,11 +1071,11 @@ const bool PlayerCharacter::UseFear()
     return false;
 }
 
-const bool PlayerCharacter::UseFingerStrike()
+bool PlayerCharacter::UseFingerStrike() const
 {
     if (characterType == CHARACTER::SURA)
     {
-        for (const auto& ability : warrior.Ability) {
+        for (const auto& ability : sura.Ability) {
             if (ability->GetSkillName() == "Finger Strike") {
                 return true;
             }
@@ -1058,3 +1083,6 @@ const bool PlayerCharacter::UseFingerStrike()
     }
     return false;
 }
+
+
+

@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +132,10 @@
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Assassin.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
+    <ClCompile Include="ShamanDragonForceSkills.cpp" />
     <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="ShamanHealingForceSkills.cpp" />
+    <ClCompile Include="ShamanHealingForceSkills.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="Shaman.cpp" />
@@ -145,12 +149,14 @@
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Assassin.h" />
     <ClInclude Include="CharacterAbilities.h" />
+    <ClInclude Include="ShamanDragonForceSkills.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="pc.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAbstraction.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Shaman.h" />
+    <ClInclude Include="ShamanSkills.h" />
     <ClInclude Include="StatBlock.h" />
     <ClInclude Include="Sura.h" />
     <ClInclude Include="Types.h" />

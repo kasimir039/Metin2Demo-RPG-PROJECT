@@ -3,8 +3,8 @@
 #include "Abilities.h"
 #include <memory>
 
-enum SHAMAN_SKILLS { BLESSING = 1, DRARGONS_ROAR, DRAGONS_STRENGTH, FLYING_TALISMAN, REFLECT, SHOOTING_DRAGON, ATTACK_UP, CURE, LIGHTNING_CLAW, LIGHTNING_THROW, SUMMON_LIGHTNING, SWIFTNESS };
-enum CHOOSE_SHAMAN_SKILLS { DARGON_FORCE = 1, HEALING_FORCE };
+enum class SHAMAN_SKILLS { BLESSING = 1, DRARGONS_ROAR, DRAGONS_STRENGTH, FLYING_TALISMAN, REFLECT, SHOOTING_DRAGON, ATTACK_UP, CURE, LIGHTNING_CLAW, LIGHTNING_THROW, SUMMON_LIGHTNING, SWIFTNESS };
+enum class CHOOSE_SHAMAN_SKILLS { DARGON_FORCE = 1, HEALING_FORCE };
 
 class Shaman final : public PlayerAbstraction,public Abilities
 {
@@ -27,11 +27,9 @@ private:
 
     StatBlock* stats;
 public:
-    Shaman(Player* player);
+    explicit Shaman(Player* player);
 
     Shaman() = delete;
-    Shaman(const Shaman&) = delete;
-    Shaman(const Shaman&&) = delete;
 
     std::vector<std::unique_ptr<Abilities>> Ability;
 
@@ -52,8 +50,8 @@ public:
     void GetCure() const;
     void GetLightningClaw() const;
     void GetLightningThrow() const;
-    void GetSSummonLightning() const;
-    void Swiftness() const;
+    void GetSummonLightning() const;
+    void GetSwiftness() const;
 
     //Upgrade Skills
     void UpgradeBlessing();

@@ -4,6 +4,7 @@ Shaman::Shaman(Player* player) : PlayerAbstraction(player),
 Abilities(skillName, cooldown, requiredSp, attackPower, duration, defence, attackValue, attackSpeed, movingSpeed, skillLevel, targetSelf, targetEnemy, targetMultiple, weaponEffect, unarmedEffect),
 stats(nullptr)
 {
+
 }
 
 void Shaman::Display() const noexcept {
@@ -129,11 +130,11 @@ void Shaman::GetLightningThrow() const
 {
 }
 
-void Shaman::GetSSummonLightning() const
+void Shaman::GetSummonLightning() const
 {
 }
 
-void Shaman::Swiftness() const
+void Shaman::GetSwiftness() const
 {
 }
 

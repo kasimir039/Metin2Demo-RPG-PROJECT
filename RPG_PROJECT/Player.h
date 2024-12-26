@@ -4,7 +4,7 @@
 
 class Player {
 public:
-    virtual const void DisplayCharacter() noexcept = 0;
-    virtual ~Player() {}
+    virtual void DisplayCharacter() noexcept = 0;
+    virtual ~Player() = default;
 };
 

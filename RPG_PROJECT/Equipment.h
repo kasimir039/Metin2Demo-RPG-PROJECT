@@ -6,7 +6,7 @@
 class Equipment
 {
 protected:
-	Equipment(std::string name);
+	explicit Equipment(const std::string& name);
 
 private:
 	std::string eqName;
@@ -14,11 +14,10 @@ private:
 public:
 
 	Equipment() = delete;
-	Equipment(const Equipment&) = delete;
-	Equipment(const Equipment&&) = delete;
 
 
-	const std::string GetEquipmentName()  const noexcept;
+
+	  std::string GetEquipmentName() const noexcept;
 
 
 };

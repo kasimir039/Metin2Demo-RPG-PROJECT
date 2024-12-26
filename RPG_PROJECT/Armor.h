@@ -11,13 +11,10 @@ public:
 
 	Armor(std::string name, equipmentType hp, equipmentType defense);
 	Armor() = delete;
-	Armor(const Armor&) = delete;
-	Armor(const Armor&&) = delete;
 
 
-
-	static const equipmentType GetArmorHp() noexcept;
-	static const equipmentType GetArmorDef() noexcept;
+	static  equipmentType GetArmorHp() noexcept;
+	static  equipmentType GetArmorDef() noexcept;
 
 
 };

@@ -8,22 +8,22 @@ StatBlock::StatBlock(statusType VIT, statusType INT, statusType STR, statusType 
 	CalculateMaxAllPoint();
 }
 
-const statusType StatBlock::GetVit() noexcept { return _vit; }
-const statusType StatBlock::GetInt() noexcept { return _int; }
-const statusType StatBlock::GetStr() noexcept { return _str; }
-const statusType StatBlock::GetDex() noexcept { return _dex; }
-const statusType StatBlock::GetMaxVit() const noexcept { return MAXVIT; }
-const statusType StatBlock::GetMaxInt() const noexcept { return MAXINT; }
-const statusType StatBlock::GetMaxStr() const noexcept { return MAXSTR; }
-const statusType StatBlock::GetMaxDex() const noexcept { return MAXDEX; }
-const statusType StatBlock::GetHealthPoint() const noexcept { return healthPoint; }
-const statusType StatBlock::GetIntelligencePoint() const noexcept { return intelligencePoint; }
-const statusType StatBlock::GetStrengthPoint() const noexcept { return strengthPoint; }
-const statusType StatBlock::GetDexPoint() const noexcept { return durabilityPoint; }
-const statusType StatBlock::GetMaxHealthPoint() const noexcept { return maxHealthPoint; }
-const statusType StatBlock::GetMaxIntelligencePoint() const noexcept { return maxIntelligencePoint; }
-const statusType StatBlock::GetMaxStrengthPoint() const noexcept { return maxStrengthPoint; }
-const statusType StatBlock::GetMaxDexPoint() const noexcept { return maxDurabilityPoint; }
+ statusType StatBlock::GetVit() noexcept { return _vit; }
+ statusType StatBlock::GetInt() noexcept { return _int; }
+ statusType StatBlock::GetStr() noexcept { return _str; }
+ statusType StatBlock::GetDex() noexcept { return _dex; }
+ statusType StatBlock::GetMaxVit() const noexcept { return MAXVIT; }
+ statusType StatBlock::GetMaxInt() const noexcept { return MAXINT; }
+ statusType StatBlock::GetMaxStr() const noexcept { return MAXSTR; }
+ statusType StatBlock::GetMaxDex() const noexcept { return MAXDEX; }
+ statusType StatBlock::GetHealthPoint() const noexcept { return healthPoint; }
+ statusType StatBlock::GetIntelligencePoint() const noexcept { return intelligencePoint; }
+ statusType StatBlock::GetStrengthPoint() const noexcept { return strengthPoint; }
+ statusType StatBlock::GetDexPoint() const noexcept { return durabilityPoint; }
+ statusType StatBlock::GetMaxHealthPoint() const noexcept { return maxHealthPoint; }
+ statusType StatBlock::GetMaxIntelligencePoint() const noexcept { return maxIntelligencePoint; }
+ statusType StatBlock::GetMaxStrengthPoint() const noexcept { return maxStrengthPoint; }
+ statusType StatBlock::GetMaxDexPoint() const noexcept { return maxDurabilityPoint; }
 
 void StatBlock::SetVit(statusType value) 
 {
@@ -121,7 +121,7 @@ void StatBlock::SetDurabilityPoint(statusType value)
 
 }
 
-const void StatBlock::CalculateAllPoint() noexcept {
+ void StatBlock::CalculateAllPoint() noexcept {
 	
 	CalculateHealthPoint();
 	CalculateIntelligencePoint();
@@ -131,7 +131,7 @@ const void StatBlock::CalculateAllPoint() noexcept {
 
 }
 
-const void StatBlock::CalculateMaxAllPoint() noexcept {
+ void StatBlock::CalculateMaxAllPoint() noexcept {
 
 	CalculateMaxHealthPoint();
 	CalculateMaxIntelligencePoint();
@@ -140,43 +140,43 @@ const void StatBlock::CalculateMaxAllPoint() noexcept {
 
 }
 
-const void StatBlock::CalculateHealthPoint() noexcept
+ void StatBlock::CalculateHealthPoint() noexcept
 {
 	healthPoint = (_vit * POINT) / 2u;
 
 }
-const void StatBlock::CalculateIntelligencePoint() noexcept
+ void StatBlock::CalculateIntelligencePoint() noexcept
 {
 	intelligencePoint = (_int * POINT) / 2u;
 
 }
-const void StatBlock::CalculateStrengthPoint() noexcept
+ void StatBlock::CalculateStrengthPoint() noexcept
 {
 	strengthPoint = (_str * POINT) / 2u;
 
 }
-const void StatBlock::CalculateDexPoint() noexcept
+ void StatBlock::CalculateDexPoint() noexcept
 {
 	durabilityPoint = (_dex * POINT) / 2u;
 
 }
 
-const void StatBlock::CalculateMaxHealthPoint() noexcept
+ void StatBlock::CalculateMaxHealthPoint() noexcept
 {
 	maxHealthPoint = healthPoint;
 
 }
-const void StatBlock::CalculateMaxIntelligencePoint() noexcept
+ void StatBlock::CalculateMaxIntelligencePoint() noexcept
 {
 	maxIntelligencePoint = intelligencePoint;
 }
-const void StatBlock::CalculateMaxStrengthPoint() noexcept
+ void StatBlock::CalculateMaxStrengthPoint() noexcept
 {
 	maxStrengthPoint = strengthPoint;
 
 }
 
-const void StatBlock::CalculateMaxDexPoint() noexcept
+ void StatBlock::CalculateMaxDexPoint() noexcept
 {
 	maxDurabilityPoint = durabilityPoint;
 

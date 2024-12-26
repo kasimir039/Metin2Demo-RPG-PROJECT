@@ -34,25 +34,25 @@ public:
 	StatBlock(const StatBlock&&) = delete;
 
 	//Getters
-	const statusType GetVit() noexcept;
-	const statusType GetInt() noexcept;
-	const statusType GetStr() noexcept;
-	const statusType GetDex() noexcept;
+	 statusType GetVit() noexcept;
+	 statusType GetInt() noexcept;
+	 statusType GetStr() noexcept;
+	 statusType GetDex() noexcept;
 
-	const statusType GetMaxVit() const noexcept;
-	const statusType GetMaxInt() const noexcept;
-	const statusType GetMaxStr() const noexcept;
-	const statusType GetMaxDex() const noexcept;
+	 statusType GetMaxVit() const noexcept;
+	 statusType GetMaxInt() const noexcept;
+	 statusType GetMaxStr() const noexcept;
+	 statusType GetMaxDex() const noexcept;
 
-	const statusType GetHealthPoint() const noexcept;
-	const statusType GetIntelligencePoint() const noexcept;
-	const statusType GetStrengthPoint() const noexcept;
-	const statusType GetDexPoint() const noexcept;
+	 statusType GetHealthPoint() const noexcept;
+	 statusType GetIntelligencePoint() const noexcept;
+	 statusType GetStrengthPoint() const noexcept;
+	 statusType GetDexPoint() const noexcept;
 
-	const statusType GetMaxHealthPoint() const noexcept;
-	const statusType GetMaxIntelligencePoint() const noexcept;
-	const statusType GetMaxStrengthPoint() const noexcept;
-	const statusType GetMaxDexPoint() const noexcept;
+	 statusType GetMaxHealthPoint() const noexcept;
+	 statusType GetMaxIntelligencePoint() const noexcept;
+	 statusType GetMaxStrengthPoint() const noexcept;
+	 statusType GetMaxDexPoint() const noexcept;
 
 	//Setters
 	void SetVit(statusType value);
@@ -67,18 +67,18 @@ public:
 
 
 	//Functions
-	const void CalculateAllPoint() noexcept;
-	const void CalculateMaxAllPoint() noexcept;
+	 void CalculateAllPoint() noexcept;
+	 void CalculateMaxAllPoint() noexcept;
 
-	const void CalculateHealthPoint() noexcept;
-	const void CalculateIntelligencePoint() noexcept;
-	const void CalculateStrengthPoint() noexcept;
-	const void CalculateDexPoint() noexcept;
+	 void CalculateHealthPoint() noexcept;
+	 void CalculateIntelligencePoint() noexcept;
+	 void CalculateStrengthPoint() noexcept;
+	 void CalculateDexPoint() noexcept;
 
-	const void CalculateMaxHealthPoint() noexcept;
-	const void CalculateMaxIntelligencePoint() noexcept;
-	const void CalculateMaxStrengthPoint() noexcept;
-	const void CalculateMaxDexPoint() noexcept;
+	 void CalculateMaxHealthPoint() noexcept;
+	 void CalculateMaxIntelligencePoint() noexcept;
+	 void CalculateMaxStrengthPoint() noexcept;
+	 void CalculateMaxDexPoint() noexcept;
 
 
 

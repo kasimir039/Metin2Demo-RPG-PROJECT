@@ -9,13 +9,10 @@ private:
 
 public:
 
-	Weapon(std::string name,equipmentType attack);
+	Weapon(const std::string& name,equipmentType attack);
 	Weapon() = delete;
-	Weapon(const Weapon&) = delete;
-	Weapon(const Weapon&&) = delete;
 
-
-	static const equipmentType GetWeaponPower() noexcept;
+	static equipmentType GetWeaponPower() noexcept;
 
 
 };

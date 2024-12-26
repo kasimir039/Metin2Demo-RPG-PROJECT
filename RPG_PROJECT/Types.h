@@ -1,8 +1,8 @@
 #pragma once
 #include <cstdint>
 
-typedef uint16_t statusType; // unsigned short
-typedef uint64_t expType; // unsigned long long
-typedef uint16_t levelType; // unsigned short
-typedef uint32_t equipmentType; // unsigned int
-typedef uint16_t skillType; // unsigned short
+using statusType = uint16_t; // unsigned short
+using expType = uint64_t; // unsigned long long
+using levelType = uint16_t; // unsigned short
+using equipmentType = uint32_t; // unsigned int
+using skillType = uint16_t; // unsigned short
